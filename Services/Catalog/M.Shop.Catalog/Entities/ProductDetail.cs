@@ -13,6 +13,9 @@ namespace M.Shop.Catalog.Entities
 
 		public string ProductID { get; set; }
 
+		[BsonIgnore]
+		public Product Product { get; set; }
+
 		public string ProductInformation { get; set; }
 	}
 }
