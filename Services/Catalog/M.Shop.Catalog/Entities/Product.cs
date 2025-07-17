@@ -24,7 +24,6 @@ namespace M.Shop.Catalog.Entities
 		[BsonIgnore]
 		public ProductImage ProductImages { get; set; }
 
-
 		public string ProductName { get; set; }
 
 		public decimal ProductPrice { get; set; }
