@@ -10,10 +10,6 @@ namespace M.Shop.Catalog.Dtos.ProductDtos
 
 		public string CategoryID { get; set; }
 
-		public string ProductDetailID { get; set; }
-
-		public string ProductImagesID { get; set; }
-
 		public string ProductName { get; set; }
 
 		public decimal ProductPrice { get; set; }

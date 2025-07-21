@@ -47,7 +47,7 @@ namespace M.Shop.Catalog.Services.ProductDetailServices
 		public async Task UpdateProductDetailAsync(UpdateProductDetailDto ProductDetailDto)
 		{
 			var value = _mapper.Map<ProductDetail>(ProductDetailDto);
-			await _collection.FindOneAndReplaceAsync(x => x.ProductDetailID == ProductDetailDto.ProductID, value);
+			await _collection.FindOneAndReplaceAsync(x => x.ProductDetailID == ProductDetailDto.ProductDetailID, value);
 		}
 	}
 }
