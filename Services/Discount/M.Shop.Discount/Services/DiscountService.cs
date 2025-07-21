@@ -15,7 +15,7 @@ namespace M.Shop.Discount.Services
 
 		public async Task CreateCouponAsync(CreateCouponDto couponDto)
 		{
-			var query = "insert into Coupons (Code,Rate,IsActive,Validate) values (@code,@rate,@isActive,@validate)";
+			var query = "insert into Coupons (Code,Rate,IsActive,ValidDate) values (@code,@rate,@isActive,@validate)";
 			var paramaters = new DynamicParameters();
 			paramaters.Add("@code", couponDto.Code);
 			paramaters.Add("@rate", couponDto.Rate);
@@ -24,6 +24,7 @@ namespace M.Shop.Discount.Services
 			using (var connection = _dapperContext.CreateConnection())
 			{
 				await connection.ExecuteAsync(query, paramaters);
+			
 			};
 			
 		}
@@ -57,14 +58,14 @@ namespace M.Shop.Discount.Services
 			paramaters.Add("@id", id);
 			using (var connection = _dapperContext.CreateConnection())
 			{
-				var values = await connection.QueryFirstOrDefaultAsync<ResultCouponDto>(query);
-				return values;
+				var values = await connection.QueryAsync<ResultCouponDto>(query,paramaters);
+				return values.FirstOrDefault();
 			}
 		}
 
 		public async Task UpdateCouponAsync(UpdateCouponDto couponDto)
 		{ 
-			var query = "UPDATE Coupons SET CouponCode = @couponCode, DiscountRate = @discountRate, IsActive = @isActive WHERE CouponId = @couponId";
+			var query = "UPDATE Coupons SET Code = @couponCode, Rate = @discountRate, IsActive = @isActive WHERE CouponId = @couponId";
 
 			var parameters = new DynamicParameters();
 			parameters.Add("@couponId", couponDto.CouponId);
