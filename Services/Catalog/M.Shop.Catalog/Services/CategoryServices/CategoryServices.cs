@@ -32,7 +32,7 @@ namespace M.Shop.Catalog.Services.CategoryServices
 
 		public async Task<ResultCategoryDto> GetByIdCategoryAsync(string id)
 		{
-			var values= await _categoryCollection.FindAsync(x=>x.CategoryID==id);
+			var values= await _categoryCollection.Find<Category>(x=>x.CategoryID==id).FirstOrDefaultAsync();
 			return _mapper.Map<ResultCategoryDto>(values);
 		}
 
