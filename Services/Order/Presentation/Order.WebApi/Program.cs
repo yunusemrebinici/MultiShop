@@ -2,6 +2,7 @@ using Application.Features.CQRS.Handlers.AddressHandlers;
 using Application.Features.CQRS.Handlers.OrderDetailHandlers;
 using Application.Interfaces;
 using Application.Services;
+using Persistance.Context;
 using Persistance.Repositories;
 using System.Reflection;
 
@@ -9,6 +10,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 
 // Add services to the container
+builder.Services.AddDbContext<OrderContext>();
 builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 builder.Services.AddApplicationService(builder.Configuration);
 

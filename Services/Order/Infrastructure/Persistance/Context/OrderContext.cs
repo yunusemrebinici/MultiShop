@@ -12,7 +12,7 @@ namespace Persistance.Context
 	{
 		protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 		{
-			optionsBuilder.UseSqlServer("Server=...;initial Catalog=MShopOrderDb;integrated security=true;");
+			optionsBuilder.UseSqlServer("Server=localhost,1440;initial Catalog=MShopOrderDb;User=sa;Password=123456789Yunus.;");
 
 			
 		}

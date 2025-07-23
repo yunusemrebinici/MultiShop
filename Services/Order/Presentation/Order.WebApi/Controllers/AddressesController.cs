@@ -34,9 +34,10 @@ namespace Order.WebApi.Controllers
 		}
 
 		[HttpGet("{id}")]
-		public async Task<IActionResult> GetAddress(GetAddressByIdQuery getAddressByIdQuery)
+		public async Task<IActionResult> GetAddress(int id)
 		{
-			return Ok(await _getAddressByIdQueryHandler.Handle(getAddressByIdQuery));
+			GetAddressByIdQuery query = new GetAddressByIdQuery(id);
+			return Ok(await _getAddressByIdQueryHandler.Handle(query));
 		}
 
 		[HttpGet]
@@ -46,8 +47,9 @@ namespace Order.WebApi.Controllers
 		}
 
 		[HttpDelete("{id}")]
-		public async Task<IActionResult>RemoveAddress(RemoveAddressCommand removeAddressCommand)
+		public async Task<IActionResult>RemoveAddress(int id)
 		{
+			RemoveAddressCommand removeAddressCommand=new RemoveAddressCommand(id);
 			await _removeAddressCommandHandler.Handle(removeAddressCommand);
 			return Ok("Silme İşlemi Başarılı");
 		}

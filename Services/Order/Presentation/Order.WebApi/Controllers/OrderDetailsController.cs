@@ -34,9 +34,9 @@ namespace Order.WebApi.Controllers
 		}
 
 		[HttpGet("{id}")]
-		public async Task<IActionResult> GetOrderDetail(GetOrderDetailByIdQuery getOrderDetailByIdQuery)
+		public async Task<IActionResult> GetOrderDetail(int id)
 		{
-			return Ok(await _getOrderDetailByIdQueryHandler.Handle(getOrderDetailByIdQuery));
+			return Ok(await _getOrderDetailByIdQueryHandler.Handle(new GetOrderDetailByIdQuery(id)));
 		}
 
 		[HttpGet]
@@ -46,9 +46,9 @@ namespace Order.WebApi.Controllers
 		}
 
 		[HttpDelete("{id}")]
-		public async Task<IActionResult> RemoveOrderDetail(RemoveOrderDetailCommand removeOrderDetailCommand)
+		public async Task<IActionResult> RemoveOrderDetail(int id)
 		{
-			await _removeOrderDetailCommandHandler.Handle(removeOrderDetailCommand);
+			await _removeOrderDetailCommandHandler.Handle(new RemoveOrderDetailCommand (id));
 			return Ok("Silme İşlemi Başarılı");
 		}
 

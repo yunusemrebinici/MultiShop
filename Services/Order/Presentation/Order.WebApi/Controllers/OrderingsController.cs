@@ -1,4 +1,6 @@
-﻿using Application.Features.Mediator.Commands.OrderingCommands;
+﻿using Application.Features.CQRS.Commands.OrderDetailCommands;
+using Application.Features.CQRS.Handlers.OrderDetailHandlers;
+using Application.Features.Mediator.Commands.OrderingCommands;
 using Application.Features.Mediator.Quaries.OrderingQuaries;
 using MediatR;
 using Microsoft.AspNetCore.Http;
@@ -44,6 +46,12 @@ namespace Order.WebApi.Controllers
 		{
 			await _mediator.Send(updateOrderingCommand);
 			return Ok("Güncelleme Başarılı");
+		}
+		[HttpDelete("{id}")]
+		public async Task<IActionResult> RemoveOrdering(int id)
+		{
+			await _mediator.Send(new RemoveOrderingCommand(id));
+			return Ok("Silme İşlemi Başarılı");
 		}
 	}
 }
