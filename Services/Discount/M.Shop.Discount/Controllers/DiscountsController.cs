@@ -2,11 +2,13 @@
 using M.Shop.Discount.Dtos;
 using M.Shop.Discount.Entitites;
 using M.Shop.Discount.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace M.Shop.Discount.Controllers
 {
+	[Authorize]
 	[Route("api/[controller]")]
 	[ApiController]
 	public class DiscountsController : ControllerBase
