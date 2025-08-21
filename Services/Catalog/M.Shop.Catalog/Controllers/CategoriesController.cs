@@ -1,10 +1,12 @@
 ﻿using M.Shop.Catalog.Dtos.CategoryDtos;
 using M.Shop.Catalog.Services.CategoryServices;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace M.Shop.Catalog.Controllers
 {
+	[Authorize]
 	[Route("api/[controller]")]
 	[ApiController]
 	public class CategoriesController : ControllerBase

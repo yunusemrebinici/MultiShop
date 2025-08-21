@@ -8,8 +8,17 @@ using M.Shop.Catalog.Services.ProductImageServices;
 using System.Reflection;
 using M.Shop.Catalog.Settings;
 using Microsoft.Extensions.Options;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(opt =>
+{
+    opt.Authority = builder.Configuration["IdentityServerUrl"];
+    opt.Audience = "ResourceCatalog";
+    opt.RequireHttpsMetadata= false;
+
+});
 
 // Add services to the container.
 builder.Services.AddScoped<IDatabaseSettings,DatabaseSettings>();
@@ -40,6 +49,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseAuthentication();
 
 app.UseAuthorization();
 
