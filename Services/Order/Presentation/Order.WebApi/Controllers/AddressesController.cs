@@ -2,11 +2,13 @@
 using Application.Features.CQRS.Commands.AddressComands;
 using Application.Features.CQRS.Handlers.AddressHandlers;
 using Application.Features.CQRS.Quaries.AddressQuaries;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Order.WebApi.Controllers
 {
+	[Authorize]
 	[Route("api/[controller]")]
 	[ApiController]
 	public class AddressesController : ControllerBase

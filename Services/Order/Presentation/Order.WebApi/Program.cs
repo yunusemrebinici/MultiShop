@@ -2,11 +2,21 @@ using Application.Features.CQRS.Handlers.AddressHandlers;
 using Application.Features.CQRS.Handlers.OrderDetailHandlers;
 using Application.Interfaces;
 using Application.Services;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Persistance.Context;
 using Persistance.Repositories;
 using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
+
+
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(x =>
+{
+	x.Authority = builder.Configuration["IdentityServerUrl"];
+	x.Audience = "ResourceOrder";
+	x.RequireHttpsMetadata = false;
+
+});
 
 
 // Add services to the container
@@ -44,6 +54,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseAuthentication();
 
 app.UseAuthorization();
 

@@ -2,11 +2,13 @@
 using Application.Features.CQRS.Commands.OrderDetailCommands;
 using Application.Features.CQRS.Handlers.OrderDetailHandlers;
 using Application.Features.CQRS.Quaries.OrderDetailQuaries;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Order.WebApi.Controllers
 {
+	[Authorize]
 	[Route("api/[controller]")]
 	[ApiController]
 	public class OrderDetailsController : ControllerBase
