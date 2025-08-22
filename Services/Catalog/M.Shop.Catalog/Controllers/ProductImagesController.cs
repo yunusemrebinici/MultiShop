@@ -1,10 +1,12 @@
 ﻿using M.Shop.Catalog.Dtos.ProductImageDtos;
 using M.Shop.Catalog.Services.ProductImageServices;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace M.Shop.Catalog.Controllers
 {
+	[Authorize]
 	[Route("api/[controller]")]
 	[ApiController]
 	public class ProductImagesController : ControllerBase
