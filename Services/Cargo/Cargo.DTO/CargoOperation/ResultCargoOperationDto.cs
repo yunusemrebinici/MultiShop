@@ -8,5 +8,12 @@ namespace Cargo.DTO.CargoOperation
 {
 	public class ResultCargoOperationDto
 	{
+		public int CargoOperationId { get; set; }
+
+		public string Barcode { get; set; }
+
+		public string Description { get; set; }
+
+		public DateTime OperationDate { get; set; }
 	}
 }
