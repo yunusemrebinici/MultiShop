@@ -37,8 +37,8 @@ namespace Cargo.DataAccessLayer.Repositories
 
 		public async Task Remove(T entity)
 		{
-			var remove = await _context.Set<T>().FindAsync(entity);
-			_context.Remove(remove);
+			
+			_context.Remove(entity);
 			await _context.SaveChangesAsync();
 		}
 
