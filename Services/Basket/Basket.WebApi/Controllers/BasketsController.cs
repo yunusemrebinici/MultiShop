@@ -22,8 +22,8 @@ namespace Basket.WebApi.Controllers
 		[HttpGet]
 		public async Task<IActionResult> GetBasketDetail()
 		{
+			var user = User.Claims;
 			var values = await _basketService.GetBasket(_loginService.GetUserId);
-
 			return Ok(values);
 		}
 

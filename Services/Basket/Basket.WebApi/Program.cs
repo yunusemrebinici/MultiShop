@@ -6,11 +6,12 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
+using System.IdentityModel.Tokens.Jwt;
 
 var builder = WebApplication.CreateBuilder(args);
 
 var requireAuthorizePolicy=new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
-
+JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Remove("sub");
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(opt =>
 {
 	opt.Authority = builder.Configuration["IdentityServerUrl"];
@@ -27,7 +28,7 @@ builder.Services.Configure<RedisSettings>(builder.Configuration.GetSection("Redi
 builder.Services.AddSingleton<RedisService>(sp =>
 {
 	var redisSettings = sp.GetRequiredService<IOptions<RedisSettings>>().Value;
-	var redis = new RedisService(redisSettings._host, redisSettings._port);
+	var redis = new RedisService(redisSettings.Host, redisSettings.Port);
 	redis.Connect();
 	return redis;
 });

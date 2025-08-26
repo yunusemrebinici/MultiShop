@@ -4,14 +4,16 @@ namespace Basket.WebApi.Settings
 {
 	public class RedisService
 	{
-		private readonly string _host;
-		private readonly int _port;
+		public string _host { get; set; }
+
+		public int _port { get; set; }
 
 		private ConnectionMultiplexer _connectionMultiplexer;
-		public RedisService(string host, int port)
+
+		public RedisService(string host, int post)
 		{
 			_host = host;
-			_port = port;
+			_port = post;
 		}
 
 		public void Connect() => _connectionMultiplexer = ConnectionMultiplexer.Connect($"{_host}:{_port}");
