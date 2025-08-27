@@ -8,5 +8,10 @@ namespace MShop.WebUI.Controllers
 		{
 			return View();
 		}
+
+		public async Task<IActionResult> ProductDetail()
+		{
+			return View();
+		}
 	}
 }
