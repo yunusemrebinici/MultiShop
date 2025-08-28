@@ -26,4 +26,8 @@
     <None Include="wwwroot\admin\.DS_Store" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Frontends.DTO\Frontends.DTO.csproj" />
+  </ItemGroup>
+
 </Project>

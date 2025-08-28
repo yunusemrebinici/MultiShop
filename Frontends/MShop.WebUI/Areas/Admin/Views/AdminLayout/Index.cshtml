@@ -4,15 +4,38 @@
 }
 
 <!DOCTYPE html>
-
 <html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Index</title>
-  
-</head>
+
+@await Component.InvokeAsync("_AdminLayoutHeadComponentPartial")
+
 <body>
-    <h1>deneme</h1>
+
+	<div class="wrapper">
+
+		@await Component.InvokeAsync("_AdminLayoutNavbarComponentPartial")
+
+		@await Component.InvokeAsync("_AdminLayoutSidebarComponentPartial")
+
+		<div class="main-panel">
+			<div class="content">
+				<div class="container-fluid">			
+					<div class="row">
+						<div class="col-md-12">
+							<div class="card">
+								@RenderBody()
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			@await Component.InvokeAsync("_AdminLayoutFooterComponentPartial")
+		</div>
+
+	</div>
+		
 </body>
+
+@await Component.InvokeAsync("_AdminLayoutScriptsComponentPartial")
 </html>
     
