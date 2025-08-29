@@ -21,15 +21,17 @@ app.UseRouting();
 
 app.UseAuthorization();
 
-app.MapControllerRoute(
-	name: "default",
-	pattern: "{controller=Home}/{action=Index}/{id?}");
-
 app.UseEndpoints(endpoints =>
 {
+	// Area'lar için yönlendirme, default yönlendirmeden önce tanýmlanmalýdýr.
 	endpoints.MapControllerRoute(
-	  name: "areas",
-	  pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
+	 name: "areas",
+	 pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
 	);
+
+	// Genel (default) yönlendirme
+	endpoints.MapControllerRoute(
+		name: "default",
+		pattern: "{controller=Home}/{action=Index}/{id?}");
 });
 app.Run();
