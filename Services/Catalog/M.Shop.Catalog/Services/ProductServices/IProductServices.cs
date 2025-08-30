@@ -9,5 +9,6 @@ namespace M.Shop.Catalog.Services.ProductServices
 		Task UpdateProductAsync(UpdateProductDto ProductDto);
 		Task DeleteProductAsync(string id);
 		Task<ResultProductDto> GetByIdProductAsync(string id);
+		Task<List<ResultProductWithCategoryNameDto>> GetAllProductWithCategoryNameAsync();
 	}
 }

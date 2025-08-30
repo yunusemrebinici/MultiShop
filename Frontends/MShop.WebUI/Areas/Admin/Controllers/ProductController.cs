@@ -44,11 +44,11 @@ namespace MShop.WebUI.Areas.Admin.Controllers
 		public async Task<IActionResult> Index()
 		{
 			var client = _httpClientFactory.CreateClient();
-			var responseMessage = await client.GetAsync("https://localhost:7070/api/Products"); 
+			var responseMessage = await client.GetAsync("https://localhost:7070/api/Products/GetProductsWithCategoryName"); 
 			if (responseMessage.IsSuccessStatusCode)
 			{
 				var json = await responseMessage.Content.ReadAsStringAsync();
-				var values = JsonConvert.DeserializeObject<List<ResultProductDto>>(json); 
+				var values = JsonConvert.DeserializeObject<List<ResultProductWithCategoryNameDto>>(json); 
 				return View(values);
 			}
 			return View();

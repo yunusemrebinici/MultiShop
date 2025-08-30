@@ -19,6 +19,7 @@ namespace M.Shop.Catalog.Mapping
 			CreateMap<Product, CreateProductDto>().ReverseMap();
 			CreateMap<Product, UpdateProductDto>().ReverseMap();
 			CreateMap<Product, ResultProductDto>().ReverseMap();
+			CreateMap<Product,ResultProductWithCategoryNameDto>().ReverseMap();
 
 
 			CreateMap<ProductDetail, CreateProductDetailDto>().ReverseMap();

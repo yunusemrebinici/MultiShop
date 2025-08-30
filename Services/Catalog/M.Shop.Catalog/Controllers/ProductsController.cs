@@ -51,6 +51,11 @@ namespace M.Shop.Catalog.Controllers
 			return Ok("Silme Başarılı");
 		}
 
+		[HttpGet("GetProductsWithCategoryName")]
+		public async Task<IActionResult> GetProductsWithCategoryName()
+		{
+			return Ok(await _ProductService.GetAllProductWithCategoryNameAsync());
+		}
 	}
 
 }

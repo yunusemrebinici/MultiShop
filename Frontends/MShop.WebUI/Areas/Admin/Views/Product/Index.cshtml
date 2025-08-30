@@ -1,4 +1,4 @@
-﻿@model List<ResultProductDto>
+﻿@model List<ResultProductWithCategoryNameDto>
 @{
 	ViewData["Title"] = "Index";
 	Layout = "~/Areas/Admin/Views/AdminLayout/Index.cshtml";
@@ -15,6 +15,7 @@
 				<tr>
 					<th scope="col">#</th>
 					<th scope="col">Ürün Adı</th>
+					<th scope="col">Kategori Adı</th>
 					<th scope="col">Fiyatı</th>
 					<th scope="col">Detaylar</th>
 					<th scope="col">Sil</th>
@@ -28,6 +29,7 @@
 					<tr>
 						<td>@count</td>
 						<td>@item.ProductName</td>
+						<td>@item.CategoryName</td>
 						<td>@item.ProductPrice</td>
 						@if (item.ProductDescription.Length >= 25)
 						{
