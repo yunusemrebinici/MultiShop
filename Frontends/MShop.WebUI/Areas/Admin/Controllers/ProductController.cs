@@ -95,12 +95,12 @@ namespace MShop.WebUI.Areas.Admin.Controllers
 		}
 
 		[HttpPost("{id}")]
-		public async Task<IActionResult> UpdateProduct(UpdateProductDto updateProductDto) // DTO "UpdateProductDto" olarak değiştirildi.
+		public async Task<IActionResult> UpdateProduct(UpdateProductDto updateProductDto) 
 		{
 			var client = _httpClientFactory.CreateClient();
 			var json = JsonConvert.SerializeObject(updateProductDto);
 			StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
-			var responseMessage = await client.PutAsync("https://localhost:7070/api/Products", content); // API URL'si "Products" olarak değiştirildi.
+			var responseMessage = await client.PutAsync("https://localhost:7070/api/Products", content); 
 			if (responseMessage.IsSuccessStatusCode)
 			{
 				return RedirectToAction("Index");
@@ -113,7 +113,7 @@ namespace MShop.WebUI.Areas.Admin.Controllers
 		public async Task<IActionResult> DeleteProduct(string id)
 		{
 			var client = _httpClientFactory.CreateClient();
-			var responseMessage = await client.DeleteAsync("https://localhost:7070/api/Products/" + id); // API URL'si "Products" olarak değiştirildi.
+			var responseMessage = await client.DeleteAsync("https://localhost:7070/api/Products/" + id); 
 			if (responseMessage.IsSuccessStatusCode)
 			{
 				return RedirectToAction("Index");
