@@ -1,0 +1,50 @@
+﻿@model CreateProductDto
+@{
+    ViewData["Title"] = "CreateProduct";
+    Layout = "~/Areas/Admin/Views/AdminLayout/Index.cshtml";
+}
+
+<form method="post">
+
+	<div class="col-md-12">
+		<div class="card">
+			<div class="card-header">
+				<div class="card-title">Ürün Ekleme</div>
+			</div>
+			<div class="card-body">
+				<div class="form-group">
+					<label for="squareInput">Ürün İsmi</label>
+					<input type="text" class="form-control input-square" id="squareInput" asp-for="ProductName" placeholder="Ürün İsmi">
+				</div>
+
+				<div class="form-group">
+					<label for="squareInput">Kategori İsmi</label>
+					@Html.DropDownListFor(x => x.CategoryID, (List<SelectListItem>)ViewBag.CategoryNameList, new { @class = "form-control input-pill" })
+					
+				</div>
+				
+
+				<div class="form-group">
+					<label for="squareInput">Ürün Fiyatı</label>
+					<input type="text" class="form-control input-square" id="squareInput" asp-for="ProductPrice" placeholder="Ürün Fiyatı">
+				</div>
+
+				<div class="form-group">
+					<label for="squareInput">Ürün Açıklaması</label>
+					<input type="text" class="form-control input-square" id="squareInput" asp-for="ProductDescription" placeholder="Ürün Açıklaması">
+				</div>
+
+				<div class="form-group">
+					<label for="squareInput">Ürün Görseli</label>
+					<input type="text" class="form-control input-square" id="squareInput" asp-for="ProductImageUrl" placeholder="Ürün Görseli">
+				</div>
+
+			</div>
+			<div class="card-action">
+				<button class="btn btn-success">Kaydet</button>
+			</div>
+		</div>
+
+	</div>
+
+</form>

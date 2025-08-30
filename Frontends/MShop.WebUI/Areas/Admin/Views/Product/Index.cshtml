@@ -16,6 +16,7 @@
 					<th scope="col">#</th>
 					<th scope="col">Ürün Adı</th>
 					<th scope="col">Fiyatı</th>
+					<th scope="col">Detaylar</th>
 					<th scope="col">Sil</th>
 					<th scope="col">Güncelle</th>
 				</tr>
@@ -28,15 +29,19 @@
 						<td>@count</td>
 						<td>@item.ProductName</td>
 						<td>@item.ProductPrice</td>
-						<td><a href="#" class="btn btn-warning">Ürünler</a></td>
-						<td><a href="/Admin/Category/DeleteCategory/@item.CategoryID" class="btn btn-danger">Sil</a></td>
-						<td><a href="/Admin/Category/UpdateCategory/@item.CategoryID" class="btn btn-success">Güncelle</a></td>
+						@if (item.ProductDescription.Length >= 25)
+						{
+							<td>@item.ProductDescription.Substring(0,25) ...</td>
+						}
+						else{<td>@item.ProductDescription</td>}
+						<td><a href="/Admin/Product/DeleteProduct/@item.ProductID" class="btn btn-danger">Sil</a></td>
+						<td><a href="/Admin/Product/UpdateProduct/@item.ProductID" class="btn btn-success">Güncelle</a></td>
 					</tr>
 				}
 
 			</tbody>
 		</table>
-		<a href="/Admin/Category/CreateCategory" class="btn btn-info">Kategori Ekle</a>
+		<a href="/Admin/Product/CreateProduct" class="btn btn-info">Ürün Ekle</a>
 	</div>
 </div>
 

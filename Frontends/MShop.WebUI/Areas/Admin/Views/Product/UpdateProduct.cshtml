@@ -1,0 +1,52 @@
+﻿@model UpdateProductDto
+@{
+    ViewData["Title"] = "UpdateProduct";
+    Layout = "~/Areas/Admin/Views/AdminLayout/Index.cshtml";
+}
+
+<form method="post">
+
+	@Html.HiddenFor(x => x.ProductID)
+	<div class="col-md-12">
+		<div class="card">
+			<div class="card-header">
+				<div class="card-title">Ürün Güncelleme</div>
+			</div>
+			<div class="card-body">
+
+				<div class="form-group">
+					<label for="squareInput">Ürün İsmi</label>
+					<input type="text" class="form-control input-square" id="squareInput" asp-for="ProductName" placeholder="Kategori İsmi">
+				</div>
+
+				<div class="form-group">
+					<label for="squareInput">Kategori İsmi</label>
+					@Html.DropDownListFor(x => x.CategoryID, (List<SelectListItem>)ViewBag.CategoryNameListForUpdate, new { @class = "form-control input-pill" })
+
+				</div>
+
+				<div class="form-group">
+					<label for="squareInput">Ürün Fiyatı</label>
+					<input type="text" class="form-control input-square" id="squareInput" asp-for="ProductPrice" placeholder="Ürün Fiyatı">
+				</div>
+
+				<div class="form-group">
+					<label for="squareInput">Ürün Resmi</label>
+					<input type="text" class="form-control input-square" id="squareInput" asp-for="ProductImageUrl" placeholder="Ürün Resmi">
+				</div>
+
+				<div class="form-group">
+					<label for="squareInput">Ürün Açıklaması</label>
+					<input type="text" class="form-control input-square" id="squareInput" asp-for="ProductDescription" placeholder="Ürün Açıklaması">
+				</div>
+
+			</div>
+			<div class="card-action">
+				<button class="btn btn-success">Güncelle</button>
+			</div>
+		</div>
+
+	</div>
+
+</form>
+
