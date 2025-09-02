@@ -9,6 +9,7 @@ using System.Reflection;
 using M.Shop.Catalog.Settings;
 using Microsoft.Extensions.Options;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using M.Shop.Catalog.Services.FeatureSliderServices;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -26,6 +27,7 @@ builder.Services.AddScoped<ICategoryService,CategoryServices>();
 builder.Services.AddScoped<IProductServices,ProductServices>();
 builder.Services.AddScoped<IProductDetailServices,ProductDetailServices>();
 builder.Services.AddScoped<IProductImageServices,ProductImageServices>();
+builder.Services.AddScoped<IFeatureSliderService,FeatureSliderService>();
 
 builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
 
