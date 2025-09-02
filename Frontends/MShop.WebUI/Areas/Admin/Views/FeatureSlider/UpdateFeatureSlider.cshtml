@@ -1,0 +1,61 @@
+﻿@model UpdateFeatureSliderDto
+@{
+    ViewData["Title"] = "UpdateFeatureSlider";
+    Layout = "~/Areas/Admin/Views/AdminLayout/Index.cshtml";
+}
+
+<form method="post">
+
+    @Html.HiddenFor(x => x.FeatureSliderId)
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title">Öne Çıkanlar Güncelleme</div>
+            </div>
+            <div class="card-body">
+                <div class="form-group">
+                    <label for="squareInput">Başlık</label>
+                    <input type="text" class="form-control input-square" id="squareInput" asp-for="Title" placeholder="Başlık">
+                </div>
+
+                <div class="form-group">
+                    <label for="squareInput">Description</label>
+                    <input type="text" class="form-control input-square" id="squareInput" asp-for="Description" placeholder="Açıklama">
+                </div>
+
+                <div class="form-group">
+                    <label for="squareInput">Görsel</label>
+                    <input type="text" class="form-control input-square" id="squareInput" asp-for="ImageUrl" placeholder="Görsel Yolu">
+                </div>
+
+                <div class="form-check">
+                    <label>Durumu</label><br />
+                    <label class="form-radio-label">
+                        <input class="form-radio-input" type="radio" value="true" asp-for="Status">
+                        <span class="form-radio-sign">Aktif</span>
+                    </label>
+                    <label class="form-radio-label ml-3">
+                        <input class="form-radio-input" type="radio" value="false" asp-for="Status">
+                        <span class="form-radio-sign">Pasif</span>
+                    </label>
+                </div>
+
+                <div class="form-check">
+                    <label>Öne Çıkma Durumu</label><br />
+                    <label class="form-radio-label">
+                        <input class="form-radio-input" type="radio"  value="true" asp-for="Featured">
+                        <span class="form-radio-sign">Aktif</span>
+                    </label>
+                    <label class="form-radio-label ml-3">
+                        <input class="form-radio-input" type="radio"  value="false" asp-for="Featured">
+                        <span class="form-radio-sign">Pasif</span>
+                    </label>
+                </div>
+
+            </div>
+            <div class="card-action">
+                <button class="btn btn-success">Güncelle</button>
+            </div>
+        </div>
+    </div>
+</form>

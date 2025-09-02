@@ -40,6 +40,7 @@ namespace MShop.WebUI.Areas.Admin.Controllers
 		[HttpPost]
 		public async Task<IActionResult> CreateFeatureSlider(CreateFeatureSliderDto createFeatureSliderDto)
 		{
+			createFeatureSliderDto.Featured = false;
 			var client = _httpClientFactory.CreateClient();
 			var json = JsonConvert.SerializeObject(createFeatureSliderDto);
 			StringContent stringContent = new StringContent(json, Encoding.UTF8, "application/json");

@@ -15,6 +15,7 @@
 				<tr>
 					<th scope="col">#</th>
 					<th scope="col">Başlık</th>
+					<th scope="col">Görsel Yolu</th>
 					<th scope="col">Açıklama</th>
 					<th scope="col">Durumu</th>
 					<th scope="col">Öne Çıkma Durumu</th>
@@ -29,6 +30,7 @@
 					<tr>
 						<td>@count</td>
 						<td>@item.Title</td>
+						<td>@item.ImageUrl</td>
 						@if(item.Description.Length > 25)
 						{
 							<td>@item.Description.Substring(0,25)..</td>
