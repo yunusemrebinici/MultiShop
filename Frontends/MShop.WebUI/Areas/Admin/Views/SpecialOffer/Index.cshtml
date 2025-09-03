@@ -1,0 +1,51 @@
+﻿@model List<ResultSpecialOfferDto>
+@{
+	ViewData["Title"] = "Index";
+	Layout = "~/Areas/Admin/Views/AdminLayout/Index.cshtml";
+	int count = 0;
+}
+
+<div class="card">
+	<div class="card-header">
+		<div class="card-title">İndirim İşlemleri</div>
+	</div>
+	<div class="card-body">
+		<table class="table table-head-bg-success">
+			<thead>
+				<tr>
+					<th scope="col">#</th>
+					<th scope="col">Başlık</th>
+					<th scope="col">Resim Yolu</th>
+					<th scope="col">Alt Başlık</th>	
+					<th scope="col">Sil</th>
+					<th scope="col">Güncelle</th>
+				</tr>
+			</thead>
+			<tbody>
+				@foreach (var item in Model)
+				{
+					count++;
+					<tr>
+						<td>@count</td>
+						<td>@item.Title</td>
+						<td>@item.ImageUrl</td>
+						@if (item.SubTitle.Length >= 25)
+						{
+							<td>@item.SubTitle.Substring(0, 25) ...</td>
+						}
+						else
+						{
+							<td>@item.SubTitle</td>
+						}
+						
+						<td><a href="/Admin/SpecialOffer/DeleteSpecialOffer/@item.SpecialOfferId" class="btn btn-danger">Sil</a></td>
+						<td><a href="/Admin/SpecialOffer/UpdateSpecialOffer/@item.SpecialOfferId" class="btn btn-success">Güncelle</a></td>
+					</tr>
+				}
+
+			</tbody>
+		</table>
+		<a href="/Admin/SpecialOffer/CreateSpecialOffer" class="btn btn-info">Özel İndirim Ekle</a>
+	</div>
+</div>
+

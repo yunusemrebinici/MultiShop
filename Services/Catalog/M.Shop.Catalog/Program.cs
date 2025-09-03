@@ -10,6 +10,7 @@ using M.Shop.Catalog.Settings;
 using Microsoft.Extensions.Options;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using M.Shop.Catalog.Services.FeatureSliderServices;
+using M.Shop.Catalog.Services.SpecialOfferServices;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -28,6 +29,7 @@ builder.Services.AddScoped<IProductServices,ProductServices>();
 builder.Services.AddScoped<IProductDetailServices,ProductDetailServices>();
 builder.Services.AddScoped<IProductImageServices,ProductImageServices>();
 builder.Services.AddScoped<IFeatureSliderService,FeatureSliderService>();
+builder.Services.AddScoped<ISpecialOfferServices,SpecialOfferServices>();
 
 builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
 
