@@ -32,7 +32,7 @@ namespace M.Shop.Catalog.Services.FeatureServices
 
 		public async Task<ResultFeatureDto> GetByIdFeatureAsync(string id)
 		{
-			var value=await _features.Find(x=>x.FeatureId==id).ToListAsync();
+			var value=await _features.Find(x=>x.FeatureId==id).FirstOrDefaultAsync();
 			return _mapper.Map<ResultFeatureDto>(value);
 		}
 
