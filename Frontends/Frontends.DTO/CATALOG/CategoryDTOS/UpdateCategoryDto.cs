@@ -11,5 +11,7 @@ namespace Frontends.DTO.CATALOG.CategoryDTOS
 		public string CategoryID { get; set; }
 
 		public string CategoryName { get; set; }
+
+		public string ImageUrl { get; set; }
 	}
 }

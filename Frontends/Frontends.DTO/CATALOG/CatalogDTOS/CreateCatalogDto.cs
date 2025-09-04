@@ -4,11 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Frontends.DTO.CATALOG.CategoryDTOS
+namespace Frontends.DTO.CATALOG.CatalogDTOS
 {
-	public class ResultCategoryDto
+	public class CreateCatalogDto
 	{
-		public string CategoryID { get; set; }
 
 		public string CategoryName { get; set; }
 

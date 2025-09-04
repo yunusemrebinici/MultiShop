@@ -9,5 +9,7 @@ namespace Frontends.DTO.CATALOG.CategoryDTOS
 	public class CreateCategoryDto
 	{
 		public string CategoryName { get; set; }
+
+		public string ImageUrl { get; set; }
 	}
 }

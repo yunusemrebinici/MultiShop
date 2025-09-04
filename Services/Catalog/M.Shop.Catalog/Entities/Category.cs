@@ -10,5 +10,9 @@ namespace M.Shop.Catalog.Entities
 		public string CategoryID { get; set; }
 
 		public string CategoryName { get; set; }
+
+		public string ImageUrl { get; set; }
+
+
 	}
 }

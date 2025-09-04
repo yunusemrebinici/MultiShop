@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Frontends.DTO.CATALOG.CategoryDTOS
+namespace Frontends.DTO.CATALOG.CatalogDTOS
 {
-	public class ResultCategoryDto
+	public class ResultCatalogDto
 	{
 		public string CategoryID { get; set; }
 
