@@ -1,0 +1,34 @@
+﻿@model CreateFeatureDto
+@{
+    ViewData["Title"] = "CreateFeature";
+    Layout = "~/Areas/Admin/Views/AdminLayout/Index.cshtml";
+}
+
+<form method="post">
+
+	<div class="col-md-12">
+		<div class="card">
+			<div class="card-header">
+				<div class="card-title">Özellik Ekleme</div>
+			</div>
+			<div class="card-body">
+				<div class="form-group">
+					<label for="squareInput">Özellik İsmi</label>
+					<input type="text" class="form-control input-square" id="squareInput" asp-for="Title" placeholder="Özellik İsmi">
+				</div>
+
+				<div class="form-group">
+					<label for="squareInput">Icon İsmi</label>
+					<input type="text" class="form-control input-square" id="squareInput" asp-for="Icon" placeholder="Icon İsmi">
+				</div>
+
+			</div>
+			<div class="card-action">
+				<button class="btn btn-success">Kaydet</button>
+			</div>
+		</div>
+
+	</div>
+
+</form>
+

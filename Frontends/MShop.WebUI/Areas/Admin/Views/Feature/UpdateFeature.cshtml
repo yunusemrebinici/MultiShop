@@ -1,0 +1,36 @@
+﻿@model UpdateFeatureDto
+@{
+    ViewData["Title"] = "UpdateFeature";
+    Layout = "~/Areas/Admin/Views/AdminLayout/Index.cshtml";
+}
+
+<form method="post">
+
+	@Html.HiddenFor(x => x.FeatureId)
+	<div class="col-md-12">
+		<div class="card">
+			<div class="card-header">
+				<div class="card-title">Özellik Güncelleme</div>
+			</div>
+			<div class="card-body">
+				<div class="form-group">
+					<label for="squareInput">Özellik İsmi</label>
+					<input type="text" class="form-control input-square" id="squareInput" asp-for="Title" placeholder="Özellik İsmi">
+				</div>
+
+				<div class="form-group">
+					<label for="squareInput">Icon İsmi</label>
+					<input type="text" class="form-control input-square" id="squareInput" asp-for="Icon" placeholder="Icon İsmi">
+				</div>
+
+			</div>
+			<div class="card-action">
+				<button class="btn btn-success">Güncelle</button>
+			</div>
+		</div>
+
+	</div>
+
+</form>
+
+
