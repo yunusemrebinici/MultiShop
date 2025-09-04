@@ -6,12 +6,12 @@ using MongoDB.Driver;
 
 namespace M.Shop.Catalog.Services.FeatureServices
 {
-	public class FeatureService : IFeatureServices
+	public class FeatureServices : IFeatureServices
 	{
 		private readonly IMongoCollection<Feature> _features;
 		private IMapper _mapper;
 
-		public FeatureService(IMapper mapper,IDatabaseSettings settings)
+		public FeatureServices(IMapper mapper,IDatabaseSettings settings)
 		{
 			var client = new MongoClient(settings.ConnectionString);
 			var database = client.GetDatabase(settings.DatabaseName);

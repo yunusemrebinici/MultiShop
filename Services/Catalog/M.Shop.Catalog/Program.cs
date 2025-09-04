@@ -11,6 +11,7 @@ using Microsoft.Extensions.Options;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using M.Shop.Catalog.Services.FeatureSliderServices;
 using M.Shop.Catalog.Services.SpecialOfferServices;
+using M.Shop.Catalog.Services.FeatureServices;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -30,6 +31,7 @@ builder.Services.AddScoped<IProductDetailServices,ProductDetailServices>();
 builder.Services.AddScoped<IProductImageServices,ProductImageServices>();
 builder.Services.AddScoped<IFeatureSliderService,FeatureSliderService>();
 builder.Services.AddScoped<ISpecialOfferServices,SpecialOfferServices>();
+builder.Services.AddScoped<IFeatureServices,FeatureServices>();
 
 builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
 
