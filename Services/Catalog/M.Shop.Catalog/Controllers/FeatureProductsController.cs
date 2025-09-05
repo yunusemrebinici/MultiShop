@@ -9,11 +9,11 @@ namespace M.Shop.Catalog.Controllers
 	[AllowAnonymous]
 	[Route("api/[controller]")]
 	[ApiController]
-	public class FeatureProductController : ControllerBase
+	public class FeatureProductsController : ControllerBase
 	{
 		private readonly IFeatureProductServices _FeatureProductService;
 
-		public FeatureProductController(IFeatureProductServices featureProductService)
+		public FeatureProductsController(IFeatureProductServices featureProductService)
 		{
 			_FeatureProductService = featureProductService;
 		}
