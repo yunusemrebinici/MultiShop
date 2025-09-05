@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using M.Shop.Catalog.Dtos.CategoryDtos;
 using M.Shop.Catalog.Dtos.FeatureDtos;
+using M.Shop.Catalog.Dtos.FeatureProductDtos;
 using M.Shop.Catalog.Dtos.FeatureSliderDtos;
 using M.Shop.Catalog.Dtos.ProductDetailDtos;
 using M.Shop.Catalog.Dtos.ProductDtos;
@@ -44,6 +45,10 @@ namespace M.Shop.Catalog.Mapping
 			CreateMap<Feature, CreateFeatureDto>().ReverseMap();
 			CreateMap<Feature, UpdateFeatureDto>().ReverseMap();
 			CreateMap<Feature, ResultFeatureDto>().ReverseMap();
+
+			CreateMap<FeatureProduct, CreateFeatureProductDto>().ReverseMap();
+			CreateMap<FeatureProduct, UpdateFeatureProductDto>().ReverseMap();
+			CreateMap<FeatureProduct, ResultFeatureProductDto>().ReverseMap();
 
 		}
 	}
