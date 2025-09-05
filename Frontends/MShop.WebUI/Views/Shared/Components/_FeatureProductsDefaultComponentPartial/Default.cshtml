@@ -5,13 +5,13 @@
         @foreach(var item in Model)
         {
            
-            decimal offerPrice = item.Price - (item.Price / 100) * 15;
+            decimal offerPrice =  (item.Price / 100) * 15+item.Price;
             
             
             <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
             <div class="product-item bg-light mb-4">
                 <div class="product-img position-relative overflow-hidden">
-                    <img class="img-fluid w-100" src="@item.ImageUrl" alt="">
+                    <img class="img-fluid w-100" src="@item.ImageUrl" alt=""  style="width:120px; height:150px">
                    
                     <div class="product-action">
                         <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
