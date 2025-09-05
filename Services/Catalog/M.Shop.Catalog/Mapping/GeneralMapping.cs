@@ -3,6 +3,7 @@ using M.Shop.Catalog.Dtos.CategoryDtos;
 using M.Shop.Catalog.Dtos.FeatureDtos;
 using M.Shop.Catalog.Dtos.FeatureProductDtos;
 using M.Shop.Catalog.Dtos.FeatureSliderDtos;
+using M.Shop.Catalog.Dtos.OfferDiscountDtos;
 using M.Shop.Catalog.Dtos.ProductDetailDtos;
 using M.Shop.Catalog.Dtos.ProductDtos;
 using M.Shop.Catalog.Dtos.ProductImageDtos;
@@ -49,6 +50,10 @@ namespace M.Shop.Catalog.Mapping
 			CreateMap<FeatureProduct, CreateFeatureProductDto>().ReverseMap();
 			CreateMap<FeatureProduct, UpdateFeatureProductDto>().ReverseMap();
 			CreateMap<FeatureProduct, ResultFeatureProductDto>().ReverseMap();
+
+			CreateMap<OfferDiscount, CreateOfferDiscountDto>().ReverseMap();
+			CreateMap<OfferDiscount, UpdateOfferDiscountDto>().ReverseMap();
+			CreateMap<OfferDiscount, ResultOfferDiscountDto>().ReverseMap();
 
 		}
 	}

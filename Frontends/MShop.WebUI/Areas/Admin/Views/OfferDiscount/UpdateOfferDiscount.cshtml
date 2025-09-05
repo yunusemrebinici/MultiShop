@@ -1,0 +1,41 @@
+﻿@model UpdateOfferDiscountDto
+@{
+    ViewData["Title"] = "UpdateOfferDiscount";
+    Layout = "~/Areas/Admin/Views/AdminLayout/Index.cshtml";
+}
+
+<form method="post">
+
+	@Html.HiddenFor(x => x.OfferDiscountId)
+	<div class="col-md-12">
+		<div class="card">
+			<div class="card-header">
+				<div class="card-title">Özel İndirim Güncelleme</div>
+			</div>
+			<div class="card-body">
+				<div class="form-group">
+					<label for="squareInput">Başlık</label>
+					<input type="text" class="form-control input-square" id="squareInput" asp-for="Title" placeholder="Başlık">
+				</div>
+
+				<div class="form-group">
+					<label for="squareInput">Alt Başlık</label>
+					<input type="text" class="form-control input-square" id="squareInput" asp-for="SubTitle" placeholder="Alt Başlık">
+				</div>
+
+				<div class="form-group">
+					<label for="squareInput">Resim Yolu</label>
+					<input type="text" class="form-control input-square" id="squareInput" asp-for="ImageUrl" placeholder="Resim Yolu">
+				</div>
+
+
+			</div>
+			<div class="card-action">
+				<button class="btn btn-success">Güncelle</button>
+			</div>
+		</div>
+
+	</div>
+
+</form>
+
