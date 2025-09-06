@@ -14,6 +14,7 @@ using M.Shop.Catalog.Services.SpecialOfferServices;
 using M.Shop.Catalog.Services.FeatureServices;
 using M.Shop.Catalog.Services.FeatureProductServices;
 using M.Shop.Catalog.Services.OfferDiscountServices;
+using M.Shop.Catalog.Services.BrandServices;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -36,6 +37,7 @@ builder.Services.AddScoped<ISpecialOfferServices,SpecialOfferServices>();
 builder.Services.AddScoped<IFeatureServices,FeatureServices>();
 builder.Services.AddScoped<IFeatureProductServices,FeatureProductServices>();
 builder.Services.AddScoped<IOfferDiscountServices,OfferDiscountServices>();
+builder.Services.AddScoped<IBrandServices,BrandServices>();
 
 builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
 

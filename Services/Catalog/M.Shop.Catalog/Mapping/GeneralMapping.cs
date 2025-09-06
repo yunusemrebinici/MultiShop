@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using M.Shop.Catalog.Dtos.BrandDtos;
 using M.Shop.Catalog.Dtos.CategoryDtos;
 using M.Shop.Catalog.Dtos.FeatureDtos;
 using M.Shop.Catalog.Dtos.FeatureProductDtos;
@@ -54,6 +55,10 @@ namespace M.Shop.Catalog.Mapping
 			CreateMap<OfferDiscount, CreateOfferDiscountDto>().ReverseMap();
 			CreateMap<OfferDiscount, UpdateOfferDiscountDto>().ReverseMap();
 			CreateMap<OfferDiscount, ResultOfferDiscountDto>().ReverseMap();
+
+			CreateMap<Brand, CreateBrandDto>().ReverseMap();
+			CreateMap<Brand, UpdateBrandDto>().ReverseMap();
+			CreateMap<Brand, ResultBrandDto>().ReverseMap();
 
 		}
 	}
