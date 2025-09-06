@@ -24,6 +24,7 @@ namespace MShop.WebUI.Areas.Admin.Controllers
 			{
 				var json = await responseMessage.Content.ReadAsStringAsync();
 				var values = JsonConvert.DeserializeObject<List<ResultOfferDiscountDto>>(json);
+				ViewBag.count = values.Count;
 				return View(values);
 			}
 			return View();

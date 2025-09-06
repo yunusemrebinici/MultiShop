@@ -37,7 +37,15 @@
 
 			</tbody>
 		</table>
-		<a href="/Admin/OfferDiscount/CreateOfferDiscount" class="btn btn-info">Özel İndirim Ekle</a>
+		@if (ViewBag.count == 2)
+		{
+			<p>sayfa tasarımı açısından 2`den fazla veri olamaz</p>
+		}
+		else
+		{
+			<a href="/Admin/OfferDiscount/CreateOfferDiscount" class="btn btn-info">Özel İndirim Ekle</a>
+		}
+
 	</div>
 </div>
 
