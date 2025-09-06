@@ -30,6 +30,12 @@ namespace M.Shop.Catalog.Controllers
 			return Ok(await _ProductService.GetByIdProductAsync(id));
 		}
 
+		[HttpGet("GetProductsByCategory/{id}")]
+		public async Task<IActionResult> GetProductsByCategory(string id)
+		{
+			return Ok(await _ProductService.GetProductsByCategory(id));
+		}
+
 		[HttpPost]
 		public async Task<IActionResult> CreateProduct(CreateProductDto ProductDto)
 		{

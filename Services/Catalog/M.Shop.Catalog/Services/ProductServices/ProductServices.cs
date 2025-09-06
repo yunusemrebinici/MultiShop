@@ -65,6 +65,13 @@ namespace M.Shop.Catalog.Services.ProductServices
 			return _mapper.Map<ResultProductDto>(value);
 		}
 
+		public async Task<List<GetProductsByCategoryDto>> GetProductsByCategory(string id)
+		{
+			var values= await _collection.Find(x=>x.CategoryID==id).ToListAsync();
+			return _mapper.Map<List<GetProductsByCategoryDto>>(values);
+
+		}
+
 		public async Task<List<ResultProductDto>> GettAllProductAsync()
 		{
 		     var values = await _collection.Find(x=>true).ToListAsync();

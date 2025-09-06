@@ -13,5 +13,15 @@ namespace MShop.WebUI.Controllers
 		{
 			return View();
 		}
+
+		public async Task<IActionResult> ProductListWithCategoryId(string id) 
+		{
+
+			ViewBag.Id = id;
+			return View();
+
+
+		}
+
 	}
 }

@@ -1,30 +1,30 @@
 ﻿using Frontends.DTO.CATALOG.ProductDTOS;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using System.Net.Http;
 
 namespace MShop.WebUI.ViewComponents.ProductListViewComponents
 {
-	public class _ProductListComponentPartial:ViewComponent
+	public class _ProductListByCategoryComponentPartial : ViewComponent
 	{
 		private readonly IHttpClientFactory _httpClientFactory;
 
-		public _ProductListComponentPartial(IHttpClientFactory httpClientFactory)
+		public _ProductListByCategoryComponentPartial(IHttpClientFactory httpClientFactory)
 		{
 			_httpClientFactory = httpClientFactory;
 		}
 
-		public async Task <IViewComponentResult>InvokeAsync()
+		public async Task<IViewComponentResult> InvokeAsync(string id)
 		{
 			var client = _httpClientFactory.CreateClient();
-			var responseMessage = await client.GetAsync("https://localhost:7070/api/Products/GetProductsWithCategoryName");
+			var responseMessage = await client.GetAsync("https://localhost:7070/api/Products/GetProductsByCategory/"+id);
 			if (responseMessage.IsSuccessStatusCode)
 			{
 				var json = await responseMessage.Content.ReadAsStringAsync();
-				var values = JsonConvert.DeserializeObject<List<ResultProductWithCategoryNameDto>>(json);
+				var values = JsonConvert.DeserializeObject<List<GetProductsByCategoryDto>>(json);
 				return View(values);
 			}
 			return View();
 		}
+		
 	}
 }
