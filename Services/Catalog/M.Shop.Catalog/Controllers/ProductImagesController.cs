@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace M.Shop.Catalog.Controllers
 {
-	[Authorize]
+	[AllowAnonymous]
 	[Route("api/[controller]")]
 	[ApiController]
 	public class ProductImagesController : ControllerBase
@@ -24,7 +24,7 @@ namespace M.Shop.Catalog.Controllers
 			return Ok(await _ProductImageService.GettAllProductImageAsync());
 		}
 
-		[HttpGet("{id}")]
+		[HttpGet("GetProductImageById/{id}")]
 		public async Task<IActionResult> GetProductImageById(string id)
 		{
 			return Ok(await _ProductImageService.GetByIdProductImageAsync(id));

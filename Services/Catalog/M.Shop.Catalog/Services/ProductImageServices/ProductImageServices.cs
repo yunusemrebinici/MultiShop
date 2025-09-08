@@ -32,7 +32,7 @@ namespace M.Shop.Catalog.Services.ProductImageServices
 
 		public async Task<ResultProductImageDto> GetByIdProductImageAsync(string id)
 		{
-			var value = await _collection.Find<ProductImage>(x => x.ProductImagesID == id).FirstOrDefaultAsync();
+			var value = await _collection.Find(x => x.ProductID == id).FirstOrDefaultAsync();
 			return _mapper.Map<ResultProductImageDto>(value);
 
 		}

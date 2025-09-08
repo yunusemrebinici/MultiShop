@@ -1,21 +1,24 @@
-﻿using MongoDB.Bson.Serialization.Attributes;
-using MongoDB.Bson;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace M.Shop.Catalog.Entities
+namespace Frontends.DTO.CATALOG.ProductImageDTOS
 {
-	public class ProductImage
+	public class UpdateProductImageDto
 	{
-		[BsonId]
-		[BsonRepresentation(BsonType.ObjectId)]
+
 		public string ProductImagesID { get; set; }
+
 		public string Image1 { get; set; }
+
 		public string Image2 { get; set; }
+
 		public string Image3 { get; set; }
+
 		public string Image4 { get; set; }
 
 		public string ProductID { get; set; }
-
-		[BsonIgnore]
-		public Product Product { get; set; }
 	}
 }

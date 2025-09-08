@@ -4,13 +4,14 @@ namespace MShop.WebUI.Controllers
 {
 	public class ProductListController : Controller
 	{
-		public IActionResult Index()
+		public async Task <IActionResult> Index()
 		{
 			return View();
 		}
 
-		public async Task<IActionResult> ProductDetail()
+		public async Task<IActionResult> ProductDetail(string id)
 		{
+			ViewBag.ProductId=id;
 			return View();
 		}
 
