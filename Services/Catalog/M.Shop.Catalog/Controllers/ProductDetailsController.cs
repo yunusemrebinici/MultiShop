@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace M.Shop.Catalog.Controllers
 {
-	[Authorize]
+	[AllowAnonymous]
 	[Route("api/[controller]")]
 	[ApiController]
 	public class ProductDetailsController : ControllerBase
@@ -28,6 +28,23 @@ namespace M.Shop.Catalog.Controllers
 		public async Task<IActionResult> GetProductDetailById(string id)
 		{
 			return Ok(await _ProductDetailService.GetByIdProductDetailAsync(id));
+		}
+
+		[HttpGet("GetProductDetailWithProductName/{id}")]
+		public async Task<IActionResult> GetProductDetailWithProductName(string id)
+		{
+			return Ok(await _ProductDetailService.GetProductDetailWithProductName(id));
+		}
+
+		[HttpGet("GetProductDetailDescription/{id}")]
+		public async Task<IActionResult> GetProductDetailDescription(string id)
+		{
+			return Ok(await _ProductDetailService.GetProductDetailDescription(id));
+		}
+		[HttpGet("GetProductDetailInformation/{id}")]
+		public async Task<IActionResult> GetProductDetailInformation(string id)
+		{
+			return Ok(await _ProductDetailService.GetProductDetailInformation(id));
 		}
 
 		[HttpPost]
