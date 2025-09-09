@@ -83,6 +83,25 @@ namespace Comment.Api.Services
 			};
 		}
 
+		public async Task<List<ResultCommentDto>> GetCommentsByProductIdAsync(string id)
+		{
+			var values = await _context.Set<Review>().Where(x => x.ProductId == id).ToListAsync();
+			var result = values.Select(x => new ResultCommentDto
+			{
+				Comments = x.Comments,
+				Status = x.Status,
+				ReviewID = x.ReviewID,
+				ProductId = x.ProductId,
+				date = x.Date,
+				ImageUrl = x.ImageUrl,
+				Name = x.Name,
+				Point = x.Point,
+
+			}).ToList();
+
+			return result;
+		}
+
 		public async Task PassiveCommentAsync(int id)
 		{
 			var active = await _context.Set<Review>().Where(x => x.ReviewID == id).FirstOrDefaultAsync();

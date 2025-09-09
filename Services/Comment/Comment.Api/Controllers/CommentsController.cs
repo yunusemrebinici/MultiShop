@@ -29,6 +29,12 @@ namespace Comment.Api.Controllers
 			return Ok(await _commentService.GetCommentAsync(id));
 		}
 
+		[HttpGet("GetCommentsByProductId/{id}")]
+		public async Task<IActionResult> GetCommentsByProductId(string id)
+		{
+			return Ok(await _commentService.GetCommentsByProductIdAsync(id));
+		}
+
 		[HttpPost]
 		public async Task<IActionResult>CreateComment(CreateCommentDto createCommentDto)
 		{

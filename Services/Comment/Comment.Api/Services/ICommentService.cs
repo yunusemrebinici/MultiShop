@@ -5,6 +5,7 @@ namespace Comment.Api.Services
 	public interface ICommentService
 	{
 		Task<ResultCommentDto> GetCommentAsync(string id);
+		Task<List<ResultCommentDto>> GetCommentsByProductIdAsync(string id);
 		Task<List<ResultCommentDto>> GetAllCommentAsync();
 		Task CreateCommentAsync(CreateCommentDto createCommentDto);
 		Task UpdateCommentAsync(UpdateCommentDto updateCommentDto);
