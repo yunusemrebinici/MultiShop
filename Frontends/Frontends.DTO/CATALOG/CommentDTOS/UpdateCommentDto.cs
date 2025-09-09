@@ -1,6 +1,12 @@
-﻿namespace Comment.Api.CommentDTOS
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Frontends.DTO.CATALOG.CommentDTOS
 {
-	public class ResultCommentDto
+	public class UpdateCommentDto
 	{
 		public int ReviewID { get; set; }
 
@@ -12,7 +18,7 @@
 
 		public int Point { get; set; }
 
-		public DateTime date { get; set; }
+		public DateTime Date { get; set; }
 
 		public bool Status { get; set; }
 

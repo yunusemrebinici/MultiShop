@@ -54,7 +54,7 @@ namespace Comment.Api.Services
 				Status=x.Status,
 				ReviewID=x.ReviewID,
 				ProductId=x.ProductId,
-				Date=DateTime.Now,
+				date=x.Date,
 				ImageUrl = x.ImageUrl,
 				Name = x.Name,
 				Point=x.Point,
@@ -75,7 +75,7 @@ namespace Comment.Api.Services
 				Status = value.Status,
 				ReviewID = value.ReviewID,
 				ProductId = value.ProductId,
-				Date = value.Date,
+				date = value.Date,
 				ImageUrl = value.ImageUrl,
 				Name = value.Name,
 				Point=value.Point

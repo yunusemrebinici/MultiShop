@@ -12,6 +12,5 @@ namespace Comment.Api.Services
 		Task ActiveCommentAsync(int id);
 		Task PassiveCommentAsync(int id);
 
-
 	}
 }

@@ -1,0 +1,61 @@
+﻿@model UpdateCommentDto
+@{
+    ViewData["Title"] = "UpdateComment";
+    Layout = "~/Areas/Admin/Views/AdminLayout/Index.cshtml";
+}
+
+<form method="post">
+
+	@Html.HiddenFor(x => x.ReviewID)
+	<div class="col-md-12">
+		<div class="card">
+			<div class="card-header">
+				<div class="card-title">Yorum Güncelleme</div>
+			</div>
+			<div class="card-body">
+				<div class="form-group">
+					<label for="squareInput">Ürün Id</label>
+					<input type="text" class="form-control input-square" id="squareInput" asp-for="ProductId" placeholder="Ürün Id">
+				</div>
+
+				<div class="form-group">
+					<label for="squareInput">İsim </label>
+					<input type="text" class="form-control input-square" id="squareInput" asp-for="Name" placeholder="İsim">
+				</div>
+
+				<div class="form-group">
+					<label for="squareInput">Yorum</label>
+					<textarea type="text" class="form-control input-square" id="squareInput" asp-for="Comments" placeholder="Yorum"></textarea>
+				</div>
+
+				<div class="form-group">
+					<label for="squareInput">Puan</label>
+					<input type="number" class="form-control input-square" id="squareInput" asp-for="Point" placeholder="Puan">
+				</div>
+					
+				<div class="form-group">
+					<label for="squareInput">Tarih</label>
+					<input type="datetime-local" class="form-control input-square" id="squareInput" asp-for="Date">
+				</div>
+
+					
+				<div class="form-group">
+					<label for="squareInput">Durum</label>
+					<input type="Text" class="form-control input-square" id="squareInput" asp-for="Status">
+				</div>
+
+				<div class="form-group">
+					<label for="squareInput">Resim Yolu</label>
+					<input type="text" class="form-control input-square" id="squareInput" asp-for="ImageUrl">
+				</div>
+
+			</div>
+			<div class="card-action">
+				<button class="btn btn-success">Güncelle</button>
+			</div>
+		</div>
+
+	</div>
+
+</form>
+
