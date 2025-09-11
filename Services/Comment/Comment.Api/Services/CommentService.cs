@@ -85,7 +85,7 @@ namespace Comment.Api.Services
 
 		public async Task<List<ResultCommentDto>> GetCommentsByProductIdAsync(string id)
 		{
-			var values = await _context.Set<Review>().Where(x => x.ProductId == id).ToListAsync();
+			var values = await _context.Set<Review>().Where(x => x.ProductId == id && x.Status==true).ToListAsync();
 			var result = values.Select(x => new ResultCommentDto
 			{
 				Comments = x.Comments,

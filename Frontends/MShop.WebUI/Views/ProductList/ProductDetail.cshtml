@@ -16,12 +16,15 @@
 </div>
 
 <div class="container-fluid pb-5">
-	<div class="row  px-xl-5">
+	<div class="row px-xl-5">
+
 		@await Component.InvokeAsync("_ProductDetailImageSliderComponentPartial", new { id = ViewBag.ProductId })
 
 		@await Component.InvokeAsync("_ProductDetailFeatureComponentPartial", new { id = ViewBag.ProductId })
 
 	</div>
+
+
 	<div class="row px-xl-5">
 		<div class="col">
 			<div class="bg-light p-30">
