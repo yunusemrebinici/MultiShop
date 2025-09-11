@@ -8,8 +8,7 @@ namespace Frontends.DTO.CATALOG.CommentDTOS
 {
 	public class CreateCommentDto
 	{
-		
-
+	
 		public string ProductId { get; set; }
 
 		public string Name { get; set; }
