@@ -29,6 +29,12 @@ namespace M.Shop.Catalog.Services.ContactServices
 			await _contacts.DeleteOneAsync(x => x.ContactId == id);
 		}
 
+		public async Task<ResultContactDto> GetContactAsync(string id)
+		{
+			var value= await _contacts.Find(x=>x.ContactId==id).FirstOrDefaultAsync();
+			return _mapper.Map<ResultContactDto>(value);
+		}
+
 		public async Task<List<ResultContactDto>> GettAllContactAsync()
 		{
 			var values = await _contacts.Find(x => true).ToListAsync();

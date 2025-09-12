@@ -1,0 +1,39 @@
+﻿@model ResultContactDto
+@{
+    ViewData["Title"] = "ContactDetail";
+    Layout = "~/Areas/Admin/Views/AdminLayout/Index.cshtml";
+}
+
+
+	@Html.HiddenFor(x => x.ContactId)
+	<div class="col-md-12">
+		<div class="card">
+			<div class="card-header">
+				<div class="card-title">Mesaj Detayları</div>
+			</div>
+			<div class="card-body">
+
+				<div class="form-group">
+					<label for="squareInput">Gönderen</label>
+				<textarea asp-for="Name" class="form-control input-square" id="squareInput"></textarea>
+				</div>
+
+				<div class="form-group">
+					<label for="squareInput">Konu</label>
+				<textarea asp-for="Subject" class="form-control input-square" id="squareInput"></textarea>
+				</div>
+
+				<div class="form-group">
+					<label for="squareInput">Mesaj</label>
+				<textarea asp-for="Message" class="form-control input-square" id="squareInput"></textarea>
+				</div>
+
+
+			</div>
+			
+		</div>
+
+	</div>
+
+
+

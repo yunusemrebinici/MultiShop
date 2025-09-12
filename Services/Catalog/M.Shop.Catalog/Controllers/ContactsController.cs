@@ -24,6 +24,12 @@ namespace M.Shop.Catalog.Controllers
 			return Ok(await _ContactService.GettAllContactAsync());
 		}
 
+		[HttpGet("{id}")]
+		public async Task<IActionResult> GetContact(string id)
+		{
+			return Ok(await _ContactService.GetContactAsync(id));
+		}
+
 		[HttpPost]
 		public async Task<IActionResult> CreateContact(CreateContactDto ContactDto)
 		{
