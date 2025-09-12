@@ -9,9 +9,13 @@ namespace MShop.WebUI.Controllers
 	public class ProductListController : Controller
 	{
 		private readonly IHttpClientFactory _httpClientFactory;
-		internal string ProductId;
+		public string producId { get; set; }
+		string pId;
+
+
 		public ProductListController(IHttpClientFactory httpClientFactory)
 		{
+			
 			_httpClientFactory = httpClientFactory;
 		}
 
@@ -23,15 +27,19 @@ namespace MShop.WebUI.Controllers
 		public async Task<IActionResult> ProductDetail(string id)
 		{
 			ViewBag.ProductId=id;
-			
+			producId = id;
+			pId = id;
 
 			return View();
 		}
 
 		[HttpGet]
-		public async Task<PartialViewResult> AddComment()
+		public async Task<PartialViewResult> AddComment(string id)
 		{
-			
+
+			producId = id;
+			ViewBag.ProductId = id;
+
 			return PartialView();
 		}
 
@@ -39,20 +47,20 @@ namespace MShop.WebUI.Controllers
 		[HttpPost]
 		public async Task<IActionResult> AddComment(CreateCommentDto createCommentDto)
 		{
+
 			createCommentDto.Date = DateTime.Parse(DateTime.Now.ToShortDateString());
-			createCommentDto.ProductId = null;
 			createCommentDto.Status = false;
 			createCommentDto.ImageUrl = null;
 			var client = _httpClientFactory.CreateClient();
 			var json = JsonConvert.SerializeObject(createCommentDto);
 			StringContent stringContent = new StringContent(json, Encoding.UTF8, "application/json");
-			var responseMessage = await client.PostAsync("https://localhost:7070/api/Comments", stringContent);
+			var responseMessage = await client.PostAsync("https://localhost:7075/api/Comments", stringContent);
 			if (responseMessage.IsSuccessStatusCode)
 			{
-				return RedirectToAction("");
+				return RedirectToAction("Index","ProductList");
 			}
 			
-			return View();
+			return View("Index","ProductList");
 		}
 
 		public async Task<IActionResult> ProductListWithCategoryId(string id) 
