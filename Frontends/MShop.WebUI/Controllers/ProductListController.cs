@@ -9,9 +9,6 @@ namespace MShop.WebUI.Controllers
 	public class ProductListController : Controller
 	{
 		private readonly IHttpClientFactory _httpClientFactory;
-		public string producId { get; set; }
-		string pId;
-
 
 		public ProductListController(IHttpClientFactory httpClientFactory)
 		{
