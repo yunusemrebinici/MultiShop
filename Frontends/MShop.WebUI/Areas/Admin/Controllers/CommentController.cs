@@ -29,6 +29,19 @@ namespace MShop.WebUI.Areas.Admin.Controllers
 			return View();
 		}
 
+		[HttpGet("{id}")]
+		public async Task<IActionResult>CommentByProduct(string id)
+		{
+			var client = _httpClientFactory.CreateClient();
+			var responseMessage = await client.GetAsync("https://localhost:7075/api/Comments/GetCommentsByProductId/"+id);
+			if (responseMessage.IsSuccessStatusCode)
+			{
+				var json = await responseMessage.Content.ReadAsStringAsync();
+				var values = JsonConvert.DeserializeObject<List<ResultCommentDto>>(json);
+				return View(values);
+			}
+			return View();
+		}
 
 		[HttpGet("{id}")]
 		public async Task<IActionResult> UpdateComment(string id)

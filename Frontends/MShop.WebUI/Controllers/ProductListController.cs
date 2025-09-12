@@ -24,8 +24,7 @@ namespace MShop.WebUI.Controllers
 		public async Task<IActionResult> ProductDetail(string id)
 		{
 			ViewBag.ProductId=id;
-			producId = id;
-			pId = id;
+			
 
 			return View();
 		}
@@ -34,7 +33,7 @@ namespace MShop.WebUI.Controllers
 		public async Task<PartialViewResult> AddComment(string id)
 		{
 
-			producId = id;
+			
 			ViewBag.ProductId = id;
 
 			return PartialView();

@@ -17,9 +17,6 @@ namespace MShop.WebUI.Areas.Admin.Controllers
 		{
 			_httpClientFactory = httpClientFactory;
 		}
-
-
-
 		internal async Task<List<SelectListItem>> CategorySelectListItem()
 		{
 			var client = _httpClientFactory.CreateClient();

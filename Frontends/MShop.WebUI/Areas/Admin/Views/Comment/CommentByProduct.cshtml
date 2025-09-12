@@ -1,0 +1,56 @@
+﻿@model List<ResultCommentDto>
+@{
+	ViewData["Title"] = "Index";
+	Layout = "~/Areas/Admin/Views/AdminLayout/Index.cshtml";
+	int count = 0;
+}
+
+<div class="card">
+	<div class="card-header">
+		<div class="card-title">Yorum İşlemleri</div>
+	</div>
+	<div class="card-body">
+		<table class="table table-head-bg-success">
+			<thead>
+				<tr>
+					<th scope="col">#</th>
+					<th scope="col">Resim Yolu</th>
+					<th scope="col">İsim</th>
+					<th scope="col">Puan</th>
+					<th scope="col">Tarih</th>
+					<th scope="col">Durum</th>
+					<th scope="col">Yorum</th>
+					<th scope="col">Sil</th>
+					<th scope="col">Güncelle</th>
+				</tr>
+			</thead>
+			<tbody>
+				@foreach (var item in Model)
+				{
+					count++;
+					<tr>
+						<td>@count</td>
+						<td>@item.ImageUrl</td>
+						<td>@item.Name</td>
+						<td>@item.Point</td>
+						<td>@item.date.ToString("dd-MMM-yyyy")</td>
+						@if (item.Status == false)
+						{
+							<td><a href="/Admin/Comment/ActiveCommentStatus/@item.ReviewID" class="btn btn-success">Aktif Yap</a></td>
+						}
+						else
+						{
+							<td><a href="/Admin/Comment/PassiveCommentStatus/@item.ReviewID" class="btn btn-danger">Pasif Yap</a></td>
+						}
+						<td>@item.Comments</td>
+						<td><a href="/Admin/Comment/DeleteComment/@item.ReviewID" class="btn btn-danger">Sil</a></td>
+						<td><a href="/Admin/Comment/UpdateComment/@item.ProductId" class="btn btn-success">Güncelle</a></td>
+					</tr>
+				}
+
+			</tbody>
+		</table>
+
+	</div>
+</div>
+

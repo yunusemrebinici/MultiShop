@@ -17,6 +17,7 @@
 					<th scope="col">Ürün Adı</th>
 					<th scope="col">Kategori Adı</th>
 					<th scope="col">Fiyatı</th>
+					<th scope="col">Yorumlar</th>
 					<th scope="col">Detaylar</th>
 					<th scope="col">Sil</th>
 					<th scope="col">Güncelle</th>
@@ -31,6 +32,7 @@
 						<td>@item.ProductName</td>
 						<td>@item.CategoryName</td>
 						<td>@item.ProductPrice</td>
+						<td><a href="/Admin/Comment/CommentByProduct/@item.ProductID" class="btn btn-primary">Yorumalar..</a></td>
 						@if (item.ProductDescription.Length >= 25)
 						{
 							<td>@item.ProductDescription.Substring(0,25) ...</td>
