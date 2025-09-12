@@ -1,4 +1,4 @@
-﻿
+﻿@model UserLoginDto
 @{
     Layout = null;
 }
@@ -24,17 +24,13 @@
 			<form class="form-detail" action="#" method="post">
 				<h2>Giriş Formu</h2>
 				<div class="form-row">
-					<input type="text" name="full-name" id="full-name" class="input-text" placeholder="İsim " >
+					<input type="text" asp-for="UserName" id="full-name" class="input-text" placeholder="Kullanıcı Adı" >
 				</div>
+				
 				<div class="form-row">
-					<input type="text" name="your-email" id="your-email" class="input-text" placeholder="Mail">
+					<input type="password" asp-for="Password" id="password" class="input-text" placeholder="Şifre">
 				</div>
-				<div class="form-row">
-					<input type="password" name="password" id="password" class="input-text" placeholder="Şifre">
-				</div>
-				<div class="form-row">
-					<input type="password" name="comfirm-password" id="comfirm-password" class="input-text" placeholder="Şifre Tekrarı">
-				</div>
+				
 				<div class="form-row-last">
 					<button class="btn btn-primary">Giriş Yap</button>
 				</div>

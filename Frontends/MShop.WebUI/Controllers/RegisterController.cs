@@ -27,7 +27,6 @@ namespace MShop.WebUI.Controllers
 		{
 			if (createUser.Password == createUser.ConfirmPassword)
 			{
-				createUser.UserName = "Admin";
 				var client = _httpClientFactory.CreateClient();
 				var json = JsonConvert.SerializeObject(createUser);
 				StringContent stringContent = new StringContent(json, Encoding.UTF8, "application/json");
