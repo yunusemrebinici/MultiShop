@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using MShop.WebUI.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,6 +19,10 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddCo
 	opt.Cookie.SecurePolicy = CookieSecurePolicy.SameAsRequest;
 	opt.Cookie.Name = "MultiShopJwt";
 });
+
+
+builder.Services.AddScoped<ILoginService, LoginService>();
+
 
 builder.Services.AddHttpContextAccessor();
 // Configure the HTTP request pipeline.
