@@ -1,8 +1,10 @@
 ﻿using Frontends.DTO.LOGİN;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MShop.WebUI.Models;
+using MShop.WebUI.Services.Interfaces;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
@@ -11,13 +13,16 @@ using System.Text.Json;
 
 namespace MShop.WebUI.Controllers
 {
+	[AllowAnonymous]
 	public class LoginController : Controller
 	{
 		private readonly IHttpClientFactory _httpClientFactory;
+		private readonly IIdentityService _identityService;
 
-		public LoginController(IHttpClientFactory httpClientFactory)
+		public LoginController(IHttpClientFactory httpClientFactory, IIdentityService identityService)
 		{
 			_httpClientFactory = httpClientFactory;
+			_identityService = identityService;
 		}
 
 		[HttpGet]
@@ -35,12 +40,25 @@ namespace MShop.WebUI.Controllers
 			if (response.IsSuccessStatusCode)
 			{
 				var jsonData = await response.Content.ReadAsStringAsync();
-				var tokenModel = JsonSerializer.Deserialize<JwtResponseModel>(jsonData, new JsonSerializerOptions
-				{
-					PropertyNamingPolicy = JsonNamingPolicy.CamelCase
-				});
+				JwtResponseModel tokenModel = null;
 
-				if (tokenModel != null)
+				try
+				{
+					 tokenModel = JsonSerializer.Deserialize<JwtResponseModel>(jsonData, new JsonSerializerOptions
+					{
+						PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+						
+					});
+					
+				}
+				catch (Exception)
+				{
+
+					return View();
+				}
+				
+
+				if (tokenModel !=null)
 				{
 					JwtSecurityTokenHandler handler = new JwtSecurityTokenHandler();
 					var token = handler.ReadJwtToken(tokenModel.Token);
@@ -60,6 +78,21 @@ namespace MShop.WebUI.Controllers
 				}
 			}
 			return View();
+		}
+
+		[HttpGet]
+		public async Task<IActionResult> SignUp()
+		{
+			return View();
+		}
+
+		[HttpPost]
+		public async Task<IActionResult>SignUp(SignUpDto signUp)
+		{
+			signUp.UserName = "emre01";
+			signUp.Password = "123456Emre.";
+			_identityService.SignIn(signUp);
+			return RedirectToAction("Index", "Default");
 		}
 	}
 }

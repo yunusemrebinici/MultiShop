@@ -1,10 +1,12 @@
 ﻿using M.Shop.Catalog.Dtos.OfferDiscountDtos;
 using M.Shop.Catalog.Services.OfferDiscountServices;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace M.Shop.Catalog.Controllers
 {
+	[Authorize]
 	[Route("api/[controller]")]
 	[ApiController]
 	public class OfferDiscountsController : ControllerBase

@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using MShop.WebUI.Services;
-using Microsoft.AspNetCore.Authentication.Cookies; // Cookie Authentication için gerekli namespace
+using Microsoft.AspNetCore.Authentication.Cookies;
+using MShop.WebUI.Services.Interfaces;
+using MShop.WebUI.Services.Concrete;
+using MShop.WebUI.Settings; // Cookie Authentication için gerekli namespace
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,9 +23,20 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 		opt.Cookie.Name = "MultiShopJwt";
 	});
 
-builder.Services.AddScoped<ILoginService, LoginService>();
-builder.Services.AddHttpContextAccessor();
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).
+	AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, opt =>
+{
+	opt.LoginPath = "/Login/Index/";
+	opt.ExpireTimeSpan = TimeSpan.FromDays(5);
+	opt.Cookie.Name = "MultiShopCookie";
+	opt.SlidingExpiration = true;
 
+});
+
+builder.Services.AddScoped<ILoginService, LoginService>();
+builder.Services.AddScoped<IIdentityService,IdentityService>();
+builder.Services.AddHttpContextAccessor();
+builder.Services.Configure<ClientSettings>(builder.Configuration.GetSection("ClientSettings"));
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

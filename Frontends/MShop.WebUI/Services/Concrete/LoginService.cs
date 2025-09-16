@@ -1,6 +1,7 @@
-﻿using System.Security.Claims;
+﻿using MShop.WebUI.Services.Interfaces;
+using System.Security.Claims;
 
-namespace MShop.WebUI.Services
+namespace MShop.WebUI.Services.Concrete
 {
 	public class LoginService : ILoginService
 	{
