@@ -70,7 +70,7 @@ namespace MShop.WebUI.Services.Concrete
 				{
 					Name=OpenIdConnectParameterNames.RefreshToken,
 					Value=token.RefreshToken
-				}
+				},
 				new AuthenticationToken
 				{
 					Name=OpenIdConnectParameterNames.ExpiresIn,

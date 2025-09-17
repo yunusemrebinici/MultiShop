@@ -81,17 +81,17 @@ namespace MShop.WebUI.Controllers
 		}
 
 		[HttpGet]
-		public async Task<IActionResult> SignUp()
+		public async Task<IActionResult> SignIn()
 		{
 			return View();
 		}
 
 		[HttpPost]
-		public async Task<IActionResult>SignUp(SignUpDto signUp)
+		public async Task<IActionResult>SignIn(SignUpDto signUp)
 		{
 			signUp.UserName = "emre01";
 			signUp.Password = "123456Emre.";
-			_identityService.SignIn(signUp);
+	         await _identityService.SignIn(signUp);
 			return RedirectToAction("Index", "Default");
 		}
 	}

@@ -1,3 +1,5 @@
+ocelot port number 5000
+Identity port number 5001
 catalog port number 7070
 discount port number 7071
 order port number 7072
