@@ -26,6 +26,63 @@ namespace MShop.WebUI.Services.Concrete
 			_serviceApiSettings = serviceApiSettings.Value;
 		}
 
+		public async Task<bool> GetRefreshToken()
+		{
+			var discoveryEndPoint = await _httpClient.GetDiscoveryDocumentAsync(new DiscoveryDocumentRequest
+			{
+				Address = _serviceApiSettings.IdentityServerUrl,
+				Policy = new DiscoveryPolicy
+				{
+					RequireHttps = false,
+				}
+
+			});
+
+
+
+			var Refreshtoken = await _contextAccessor.HttpContext.GetTokenAsync(OpenIdConnectParameterNames.RefreshToken);
+
+			RefreshTokenRequest refreshTokenRequest = new()
+			{
+				ClientId=_clientSettings.MultiShopManagerClient.ClientId,
+				ClientSecret=_clientSettings.MultiShopManagerClient.ClientSecret,
+				RefreshToken=Refreshtoken,
+				Address=discoveryEndPoint.TokenEndpoint
+			};
+
+			var token= await _httpClient.RequestRefreshTokenAsync(refreshTokenRequest);
+
+			var authentication = new List<AuthenticationToken>()
+			{
+				new AuthenticationToken
+				{
+					Name=OpenIdConnectParameterNames.AccessToken,
+					Value=token.AccessToken
+				},
+				new AuthenticationToken
+				{
+					Name=OpenIdConnectParameterNames.RefreshToken,
+					Value=token.RefreshToken
+				},
+				new AuthenticationToken
+				{
+					Name=OpenIdConnectParameterNames.ExpiresIn,
+					Value=DateTime.Now.AddDays(token.ExpiresIn).ToString()
+				}
+			};
+
+
+			var result = await _contextAccessor.HttpContext.AuthenticateAsync();
+			
+			var properties= result.Properties;
+
+			properties.StoreTokens(authentication);
+
+			await _contextAccessor.HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, result.Principal, properties);
+
+			return true;
+		}
+
 		public async Task<bool> SignIn(SignUpDto signUpDto)
 		{
 			var discoveryEndPoint = await _httpClient.GetDiscoveryDocumentAsync(new DiscoveryDocumentRequest
