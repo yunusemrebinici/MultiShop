@@ -37,6 +37,7 @@ builder.Services.AddScoped<ILoginService, LoginService>();
 builder.Services.AddScoped<IIdentityService,IdentityService>();
 builder.Services.AddHttpContextAccessor();
 builder.Services.Configure<ClientSettings>(builder.Configuration.GetSection("ClientSettings"));
+builder.Services.Configure<ServiceApiSettings>(builder.Configuration.GetSection("ServiceApiSettings"));
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

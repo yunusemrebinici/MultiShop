@@ -16,19 +16,21 @@ namespace MShop.WebUI.Services.Concrete
 		private readonly HttpClient _httpClient;
 		private readonly IHttpContextAccessor _contextAccessor;
 		private readonly ClientSettings _clientSettings;
+		private readonly ServiceApiSettings _serviceApiSettings;
 
-		public IdentityService(HttpClient httpClient, IHttpContextAccessor contextAccessor,IOptions<ClientSettings> options)
+		public IdentityService(HttpClient httpClient, IHttpContextAccessor contextAccessor,IOptions<ClientSettings> options, IOptions<ServiceApiSettings> serviceApiSettings)
 		{
-			_clientSettings=options.Value;
+			_clientSettings = options.Value;
 			_httpClient = httpClient;
 			_contextAccessor = contextAccessor;
+			_serviceApiSettings = serviceApiSettings.Value;
 		}
 
 		public async Task<bool> SignIn(SignUpDto signUpDto)
 		{
 			var discoveryEndPoint = await _httpClient.GetDiscoveryDocumentAsync(new DiscoveryDocumentRequest
 			{
-				Address= "http://localhost:5001",
+				Address= _serviceApiSettings.IdentityServerUrl,
 				Policy=new DiscoveryPolicy {
 				RequireHttps=false,
 				}
@@ -50,7 +52,7 @@ namespace MShop.WebUI.Services.Concrete
 			var userInfoRequest = new UserInfoRequest
 			{
 				Token = token.AccessToken,
-				Address = discoveryEndPoint.TokenEndpoint,
+				Address = discoveryEndPoint.UserInfoEndpoint,
 
 
 			};

@@ -52,7 +52,14 @@ namespace MShopIdentityServer
 			ClientName="Multi Shop Visitor User",
 			AllowedGrantTypes=GrantTypes.ClientCredentials,
 			ClientSecrets={new Secret("multishopsecret".Sha256())},
-			AllowedScopes={ "CatalogFullPermission",  "DiscountFullPermission", "OrderFullPermission", "CargoFullPermission", "BasketFullPermission" , "OcelotFullPermission" }
+			AllowedScopes={ "CatalogFullPermission",  "DiscountFullPermission", "OrderFullPermission", "CargoFullPermission", "BasketFullPermission" , "OcelotFullPermission" ,
+
+			 IdentityServerConstants.LocalApi.ScopeName,
+			 IdentityServerConstants.StandardScopes.Email,
+			 IdentityServerConstants.StandardScopes.OpenId,
+			 IdentityServerConstants.StandardScopes.Profile
+
+			}
 
 		},
 		//Manager
@@ -62,7 +69,13 @@ namespace MShopIdentityServer
 			ClientName="Multi Shop Manager User",
 			AllowedGrantTypes=GrantTypes.ResourceOwnerPassword,
 			ClientSecrets={new Secret("multishopsecret".Sha256())},
-			AllowedScopes={ "CatalogFullPermission", "DiscountFullPermission", "OrderFullPermission", "CargoFullPermission", "BasketFullPermission" , "OcelotFullPermission" }
+			AllowedScopes={ "CatalogFullPermission", "DiscountFullPermission", "OrderFullPermission", "CargoFullPermission", "BasketFullPermission" , "OcelotFullPermission",
+
+			 IdentityServerConstants.LocalApi.ScopeName,
+			 IdentityServerConstants.StandardScopes.Email,
+			 IdentityServerConstants.StandardScopes.OpenId,
+			 IdentityServerConstants.StandardScopes.Profile
+			}
 		},
 		//Admin
 		new Client
