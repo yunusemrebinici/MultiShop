@@ -50,7 +50,7 @@ namespace MShopIdentityServer
 		{
 			ClientId="MultiShopVisitorId",
 			ClientName="Multi Shop Visitor User",
-			AllowedGrantTypes=GrantTypes.ResourceOwnerPassword,
+			AllowedGrantTypes=GrantTypes.ClientCredentials,
 			ClientSecrets={new Secret("multishopsecret".Sha256())},
 			AllowedScopes={ "CatalogFullPermission", "CatalogReadPermission", "DiscountFullPermission", "OrderFullPermission", "CargoFullPermission", "BasketFullPermission" }
 
