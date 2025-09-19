@@ -2,7 +2,8 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using MShop.WebUI.Services.Interfaces;
 using MShop.WebUI.Services.Concrete;
-using MShop.WebUI.Settings; // Cookie Authentication için gerekli namespace
+using MShop.WebUI.Settings;
+using MShop.WebUI.Handlers; // Cookie Authentication için gerekli namespace
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -35,9 +36,18 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
 
 builder.Services.AddScoped<ILoginService, LoginService>();
 builder.Services.AddScoped<IIdentityService,IdentityService>();
+builder.Services.AddScoped<ResourcheOwnerPasswordTokenHandler>();
 builder.Services.AddHttpContextAccessor();
 builder.Services.Configure<ClientSettings>(builder.Configuration.GetSection("ClientSettings"));
 builder.Services.Configure<ServiceApiSettings>(builder.Configuration.GetSection("ServiceApiSettings"));
+var values=builder.Configuration.GetSection("ServiceApiSettings").Get<ServiceApiSettings>();
+
+builder.Services.AddHttpClient<IUserService, UserService>(opt =>
+{
+	opt.BaseAddress = new Uri(values.IdentityServerUrl);
+
+}).AddHttpMessageHandler<ResourcheOwnerPasswordTokenHandler>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

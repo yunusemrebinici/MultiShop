@@ -11,9 +11,10 @@ namespace MShop.WebUI.Handlers
 		private readonly IHttpContextAccessor _contextAccessor;
 		private readonly IIdentityService _identityService;
 
-		public ResourcheOwnerPasswordTokenHandler(IIdentityService identityService)
+		public ResourcheOwnerPasswordTokenHandler(IIdentityService identityService, IHttpContextAccessor  httpContextAccessor)
 		{
 			_identityService = identityService;
+			_contextAccessor = httpContextAccessor;
 		}
 
 		protected override  async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request ,CancellationToken cancellationToken)
@@ -32,10 +33,7 @@ namespace MShop.WebUI.Handlers
 					response = await base.SendAsync(request, cancellationToken);
 				}
 			}
-			if (response.StatusCode == HttpStatusCode.Unauthorized)
-			{
-				//hata mesajı
-			}
+	
 			
 			return response;
 		}
