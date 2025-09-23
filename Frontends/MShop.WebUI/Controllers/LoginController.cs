@@ -92,7 +92,7 @@ namespace MShop.WebUI.Controllers
 			signUp.UserName = "emre01";
 			signUp.Password = "123456Emre.";
 	         await _identityService.SignIn(signUp);
-			return RedirectToAction("Index", "User");
+			return RedirectToAction("Index", "Test");
 		}
 	}
 }

@@ -35,13 +35,19 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
 
 });
 
+builder.Services.AddMemoryCache();
+
 builder.Services.AddScoped<ILoginService, LoginService>();
 builder.Services.AddScoped<IIdentityService,IdentityService>();
 builder.Services.AddScoped<ResourcheOwnerPasswordTokenHandler>();
+builder.Services.AddScoped<ClientCredentialTokenHandler>();
 builder.Services.AddHttpContextAccessor();
 builder.Services.Configure<ClientSettings>(builder.Configuration.GetSection("ClientSettings"));
 builder.Services.Configure<ServiceApiSettings>(builder.Configuration.GetSection("ServiceApiSettings"));
 var values=builder.Configuration.GetSection("ServiceApiSettings").Get<ServiceApiSettings>();
+
+
+builder.Services.AddHttpClient<IClientCredentialTokenService, ClientCredentialTokenService>();
 
 builder.Services.AddHttpClient<IUserService, UserService>(opt =>
 {
@@ -52,7 +58,8 @@ builder.Services.AddHttpClient<IUserService, UserService>(opt =>
 builder.Services.AddHttpClient<ICategoryService, CategoryService>(opt =>
 {
 	opt.BaseAddress=new Uri($"{values.OcelotServerUrl}/{values.Catalog.Path}");
-});
+}).AddHttpMessageHandler<ClientCredentialTokenHandler>();
+
 
 var app = builder.Build();
 
