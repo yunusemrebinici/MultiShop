@@ -3,7 +3,8 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using MShop.WebUI.Services.Interfaces;
 using MShop.WebUI.Services.Concrete;
 using MShop.WebUI.Settings;
-using MShop.WebUI.Handlers; // Cookie Authentication için gerekli namespace
+using MShop.WebUI.Handlers;
+using MShop.WebUI.Services.CatalogServices.CategoryServices; // Cookie Authentication için gerekli namespace
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -47,6 +48,11 @@ builder.Services.AddHttpClient<IUserService, UserService>(opt =>
 	opt.BaseAddress = new Uri(values.IdentityServerUrl);
 
 }).AddHttpMessageHandler<ResourcheOwnerPasswordTokenHandler>();
+
+builder.Services.AddHttpClient<ICategoryService, CategoryService>(opt =>
+{
+	opt.BaseAddress=new Uri($"{values.OcelotServerUrl}/{values.Catalog.Path}");
+});
 
 var app = builder.Build();
 
