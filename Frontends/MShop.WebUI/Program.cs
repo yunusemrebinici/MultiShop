@@ -4,7 +4,8 @@ using MShop.WebUI.Services.Interfaces;
 using MShop.WebUI.Services.Concrete;
 using MShop.WebUI.Settings;
 using MShop.WebUI.Handlers;
-using MShop.WebUI.Services.CatalogServices.CategoryServices; // Cookie Authentication için gerekli namespace
+using MShop.WebUI.Services.CatalogServices.CategoryServices;
+using MShop.WebUI.Services.CatalogServices.ProductServices; // Cookie Authentication için gerekli namespace
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -60,6 +61,11 @@ builder.Services.AddHttpClient<ICategoryService, CategoryService>(opt =>
 	opt.BaseAddress=new Uri($"{values.OcelotServerUrl}/{values.Catalog.Path}");
 }).AddHttpMessageHandler<ClientCredentialTokenHandler>();
 
+builder.Services.AddHttpClient<IProductService, ProductService>(opts =>
+{
+	opts.BaseAddress = new Uri($"{values.OcelotServerUrl}/{values.Catalog.Path}");
+
+}).AddHttpMessageHandler<ClientCredentialTokenHandler>();
 
 var app = builder.Build();
 
