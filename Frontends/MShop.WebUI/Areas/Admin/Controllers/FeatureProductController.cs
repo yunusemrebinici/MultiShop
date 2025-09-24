@@ -1,32 +1,29 @@
-﻿using Frontends.DTO.CATALOG.FeatureProductDTOS;
+﻿using Frontends.DTO.CATALOG.FeatureDTOS;
+using Frontends.DTO.CATALOG.FeatureProductDTOS;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using MShop.WebUI.Services.CatalogServices.FeatureServices;
 using Newtonsoft.Json;
 using System.Text;
 
 namespace MShop.WebUI.Areas.Admin.Controllers
 {
+	[Authorize]
 	[Area("Admin")]
 	[Route("Admin/[Controller]/[Action]")]
 	public class FeatureProductController : Controller
 	{
-		private readonly IHttpClientFactory _httpClientFactory;
+		private readonly IFeatureService _featureService;
 
-		public FeatureProductController(IHttpClientFactory httpClientFactory)
+		public FeatureProductController(IFeatureService featureService)
 		{
-			_httpClientFactory = httpClientFactory;
+			_featureService = featureService;
 		}
 
 		public async Task<IActionResult> Index()
 		{
-			var client = _httpClientFactory.CreateClient();
-			var responseMessage = await client.GetAsync("https://localhost:7070/api/FeatureProducts");
-			if (responseMessage.IsSuccessStatusCode)
-			{
-				var json = await responseMessage.Content.ReadAsStringAsync();
-				var values = JsonConvert.DeserializeObject<List<ResultFeatureProductDto>>(json);
-				return View(values);
-			}
-			return View();
+			var values = await _featureService.GettAllFeatureAsync();
+			return View(values);
 		}
 
 
@@ -37,60 +34,40 @@ namespace MShop.WebUI.Areas.Admin.Controllers
 		}
 
 		[HttpPost]
-		public async Task<IActionResult> CreateFeatureProduct(CreateFeatureProductDto createFeatureProductDto)
+		public async Task<IActionResult> CreateFeatureProduct(CreateFeatureDto createFeatureProductDto)
 		{
-			var client = _httpClientFactory.CreateClient();
-			var json = JsonConvert.SerializeObject(createFeatureProductDto);
-			StringContent stringContent = new StringContent(json, Encoding.UTF8, "application/json");
-			var responseMessage = await client.PostAsync("https://localhost:7070/api/FeatureProducts", stringContent);
-			if (responseMessage.IsSuccessStatusCode)
-			{
-				return RedirectToAction("Index");
-			}
 
-			return View();
+			await _featureService.CreateFeatureAsync(createFeatureProductDto);
+			return RedirectToAction("Index");
+
 		}
 
 		[HttpGet("{id}")]
 		public async Task<IActionResult> UpdateFeatureProduct(string id)
 		{
-			var client = _httpClientFactory.CreateClient();
-			var responseMessage = await client.GetAsync("https://localhost:7070/api/FeatureProducts/" + id);
-			if (responseMessage.IsSuccessStatusCode)
-			{
-				var json = await responseMessage.Content.ReadAsStringAsync();
-				var values = JsonConvert.DeserializeObject<UpdateFeatureProductDto>(json);
-				return View(values);
-			}
+			var value= await _featureService.GetByIdFeatureAsync(id);
 
-			return View();
+			return View(new UpdateFeatureDto()
+			{
+				Title = value.Title,
+				FeatureId = id,
+				Icon=value.Icon,
+					
+			});
 		}
 
 		[HttpPost("{id}")]
-		public async Task<IActionResult> UpdateFeatureProduct(UpdateFeatureProductDto updateFeatureProductDto)
+		public async Task<IActionResult> UpdateFeatureProduct(UpdateFeatureDto updateFeatureProductDto)
 		{
-			var client = _httpClientFactory.CreateClient();
-			var json = JsonConvert.SerializeObject(updateFeatureProductDto);
-			StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
-			var responseMessage = await client.PutAsync("https://localhost:7070/api/FeatureProducts", content);
-			if (responseMessage.IsSuccessStatusCode)
-			{
-				return RedirectToAction("Index");
-			}
-
-			return View();
+			await _featureService.UpdateFeatureAsync(updateFeatureProductDto);
+			return RedirectToAction("Index");
 		}
 
 		[HttpGet("{id}")]
 		public async Task<IActionResult> DeleteFeatureProduct(string id)
 		{
-			var client = _httpClientFactory.CreateClient();
-			var responseMessage = await client.DeleteAsync("https://localhost:7070/api/FeatureProducts/" + id);
-			if (responseMessage.IsSuccessStatusCode)
-			{
-				return RedirectToAction("Index");
-			}
-			return View();
+			await _featureService.DeleteFeatureAsync(id);
+			return RedirectToAction("Index");
 		}
 	}
 }
