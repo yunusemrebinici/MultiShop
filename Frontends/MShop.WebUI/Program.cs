@@ -11,7 +11,9 @@ using MShop.WebUI.Services.CatalogServices.FeatureSliderServices;
 using MShop.WebUI.Services.CatalogServices.FeatureServices;
 using MShop.WebUI.Services.CatalogServices.OfferDiscountServices;
 using MShop.WebUI.Services.CatalogServices.BrandServices;
-using MShop.WebUI.Services.CatalogServices.FeatureProductServices; // Cookie Authentication için gerekli namespace
+using MShop.WebUI.Services.CatalogServices.FeatureProductServices;
+using MShop.WebUI.Services.CatalogServices.ProductDetailServices;
+using MShop.WebUI.Services.CatalogServices.ProductImageServices; // Cookie Authentication için gerekli namespace
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -106,7 +108,15 @@ builder.Services.AddHttpClient<IFeatureProductService, FeatureProductService>(op
 	opt.BaseAddress = new Uri($"{values.OcelotServerUrl}/{values.Catalog.Path}");
 }).AddHttpMessageHandler<ClientCredentialTokenHandler>();
 
+builder.Services.AddHttpClient<IProductDetailService, ProductDetailService>(opt =>
+{
+	opt.BaseAddress = new Uri($"{values.OcelotServerUrl}/{values.Catalog.Path}");
+}).AddHttpMessageHandler<ClientCredentialTokenHandler>();
 
+builder.Services.AddHttpClient<IProductImageService, ProcuctImageService>(opt =>
+{
+	opt.BaseAddress = new Uri($"{values.OcelotServerUrl}/{values.Catalog.Path}");
+}).AddHttpMessageHandler<ClientCredentialTokenHandler>();
 
 var app = builder.Build();
 

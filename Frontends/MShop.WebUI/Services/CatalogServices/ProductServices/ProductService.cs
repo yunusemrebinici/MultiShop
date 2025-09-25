@@ -36,7 +36,7 @@ namespace MShop.WebUI.Services.CatalogServices.ProductServices
 
 		public async Task<List<GetProductsByCategoryDto>> GetProductsByCategory(string id)
 		{
-			var values = await _httpClient.GetFromJsonAsync<List<GetProductsByCategoryDto>>($"Products{id}");
+			var values = await _httpClient.GetFromJsonAsync<List<GetProductsByCategoryDto>>($"Products/GetProductsByCategory/{id}");
 			return values;
 		}
 
