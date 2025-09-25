@@ -1,4 +1,5 @@
 ﻿using Frontends.DTO.CATALOG.FeatureSliderDTOS;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MShop.WebUI.Services.CatalogServices.FeatureSliderServices;
 using Newtonsoft.Json;
@@ -6,7 +7,7 @@ using System.Text;
 
 namespace MShop.WebUI.Areas.Admin.Controllers
 {
-
+	[Authorize]
 	[Area("Admin")]
 	[Route("Admin/[Controller]/[Action]")]
 	public class FeatureSliderController : Controller

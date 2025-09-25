@@ -2,6 +2,7 @@
 using Frontends.DTO.CATALOG.FeatureProductDTOS;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using MShop.WebUI.Services.CatalogServices.FeatureProductServices;
 using MShop.WebUI.Services.CatalogServices.FeatureServices;
 using Newtonsoft.Json;
 using System.Text;
@@ -13,16 +14,17 @@ namespace MShop.WebUI.Areas.Admin.Controllers
 	[Route("Admin/[Controller]/[Action]")]
 	public class FeatureProductController : Controller
 	{
-		private readonly IFeatureService _featureService;
+	
+		private readonly IFeatureProductService _featureProductService;
 
-		public FeatureProductController(IFeatureService featureService)
+		public FeatureProductController(IFeatureProductService featureProductService)
 		{
-			_featureService = featureService;
+			_featureProductService = featureProductService;
 		}
 
 		public async Task<IActionResult> Index()
 		{
-			var values = await _featureService.GettAllFeatureAsync();
+			var values = await _featureProductService.GettAllFeatureProductAsync();
 			return View(values);
 		}
 
@@ -34,10 +36,10 @@ namespace MShop.WebUI.Areas.Admin.Controllers
 		}
 
 		[HttpPost]
-		public async Task<IActionResult> CreateFeatureProduct(CreateFeatureDto createFeatureProductDto)
+		public async Task<IActionResult> CreateFeatureProduct(CreateFeatureProductDto createFeatureProductDto)
 		{
 
-			await _featureService.CreateFeatureAsync(createFeatureProductDto);
+			await _featureProductService.CreateFeatureProductAsync(createFeatureProductDto);
 			return RedirectToAction("Index");
 
 		}
@@ -45,28 +47,28 @@ namespace MShop.WebUI.Areas.Admin.Controllers
 		[HttpGet("{id}")]
 		public async Task<IActionResult> UpdateFeatureProduct(string id)
 		{
-			var value= await _featureService.GetByIdFeatureAsync(id);
+			var value= await _featureProductService.GetByIdFeatureProductAsync(id);
 
-			return View(new UpdateFeatureDto()
+			return View(new UpdateFeatureProductDto()
 			{
 				Title = value.Title,
-				FeatureId = id,
-				Icon=value.Icon,
-					
+				FeatureProductId=value.FeatureProductId,
+				ImageUrl=value.ImageUrl,
+				Price=value.Price,		
 			});
 		}
 
 		[HttpPost("{id}")]
-		public async Task<IActionResult> UpdateFeatureProduct(UpdateFeatureDto updateFeatureProductDto)
+		public async Task<IActionResult> UpdateFeatureProduct(UpdateFeatureProductDto updateFeatureProductDto)
 		{
-			await _featureService.UpdateFeatureAsync(updateFeatureProductDto);
+			await _featureProductService.UpdateFeatureProductAsync(updateFeatureProductDto);
 			return RedirectToAction("Index");
 		}
 
 		[HttpGet("{id}")]
 		public async Task<IActionResult> DeleteFeatureProduct(string id)
 		{
-			await _featureService.DeleteFeatureAsync(id);
+			await _featureProductService.DeleteFeatureProductAsync(id);
 			return RedirectToAction("Index");
 		}
 	}

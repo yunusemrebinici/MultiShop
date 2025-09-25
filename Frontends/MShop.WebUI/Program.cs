@@ -84,7 +84,7 @@ builder.Services.AddHttpClient<IFeatureSliderService, FeatureSliderService>(opts
 
 builder.Services.AddHttpClient<IFeatureService, FeatureService>(opts =>
 {
-	opts.BaseAddress = new Uri($"{values.OcelotServerUrl}/{values.Catalog}");
+	opts.BaseAddress = new Uri($"{values.OcelotServerUrl}/{values.Catalog.Path}");
 }).AddHttpMessageHandler<ClientCredentialTokenHandler>();	
 
 builder.Services.AddHttpClient<ISpecialOfferService, SpecialOfferService>(opt =>
