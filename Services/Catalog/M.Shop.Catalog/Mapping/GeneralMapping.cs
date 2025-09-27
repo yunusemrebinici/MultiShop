@@ -63,7 +63,7 @@ namespace M.Shop.Catalog.Mapping
 			CreateMap<Brand, ResultBrandDto>().ReverseMap();
 
 			CreateMap<Contact, CreateContactDto>().ReverseMap();
-			CreateMap<Contact , ResultContactDto>().ReverseMap();
+			CreateMap<Contact, ResultContactDto>().ReverseMap();
 
 
 		}

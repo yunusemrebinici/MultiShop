@@ -6,7 +6,7 @@ namespace MShop.WebUI.Services.CatalogServices.ContactServices
 	{
 		Task<List<ResultContactDto>> GettAllContactAsync();
 		Task<ResultContactDto> GetContactAsync(string id);
-		Task CreateContactAsync(CreateContactDto ContactProductDto);
+		Task CreateContactAsync(CreateContactDto createContactDto);
 		Task DeleteContactAsync(string id);
 	}
 }

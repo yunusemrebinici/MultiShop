@@ -8,7 +8,6 @@ namespace Frontends.DTO.CATALOG.ContactDTOS
 {
 	public class CreateContactDto
 	{
-		
 		public string Name { get; set; }
 
 		public string Mail { get; set; }

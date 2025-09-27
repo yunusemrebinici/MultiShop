@@ -19,9 +19,10 @@ namespace M.Shop.Catalog.Services.ContactServices
 			_mapper = mapper;
 		}
 
-		public async Task CreateContactAsync(CreateContactDto ContactProductDto)
+		public async Task CreateContactAsync(CreateContactDto ContactDto)
 		{
-			await _contacts.InsertOneAsync(_mapper.Map<Contact>(ContactProductDto));
+			var values = _mapper.Map<Contact>(ContactDto);
+			await _contacts.InsertOneAsync(values);
 		}
 
 		public async Task DeleteContactAsync(string id)

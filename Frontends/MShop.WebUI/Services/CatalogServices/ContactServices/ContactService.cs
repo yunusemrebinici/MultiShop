@@ -11,9 +11,9 @@ namespace MShop.WebUI.Services.CatalogServices.ContactServices
 			_httpClient = httpClient;
 		}
 
-		public async Task CreateContactAsync(CreateContactDto ContactProductDto)
+		public async Task CreateContactAsync(CreateContactDto ContactDto)
 		{
-			await _httpClient.PostAsJsonAsync<CreateContactDto>("Contacts", ContactProductDto);
+			await _httpClient.PostAsJsonAsync<CreateContactDto>("Contacts", ContactDto);
 		}
 
 		public async Task DeleteContactAsync(string id)

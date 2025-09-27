@@ -1,5 +1,7 @@
 ﻿using Frontends.DTO.CATALOG.CommentDTOS;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ApplicationModels;
+using MShop.WebUI.Services.CommentServices;
 using Newtonsoft.Json;
 using System.Net.Http;
 using System.Text;
@@ -8,13 +10,14 @@ namespace MShop.WebUI.Controllers
 {
 	public class ProductListController : Controller
 	{
-		private readonly IHttpClientFactory _httpClientFactory;
+		private readonly ICommentService _commentService;
 
-		public ProductListController(IHttpClientFactory httpClientFactory)
+		public ProductListController(ICommentService commentService)
 		{
-			
-			_httpClientFactory = httpClientFactory;
+			_commentService = commentService;
 		}
+
+		
 
 		public async Task <IActionResult> Index()
 		{
@@ -47,14 +50,7 @@ namespace MShop.WebUI.Controllers
 			createCommentDto.Date = DateTime.Parse(DateTime.Now.ToShortDateString());
 			createCommentDto.Status = false;
 			createCommentDto.ImageUrl = null;
-			var client = _httpClientFactory.CreateClient();
-			var json = JsonConvert.SerializeObject(createCommentDto);
-			StringContent stringContent = new StringContent(json, Encoding.UTF8, "application/json");
-			var responseMessage = await client.PostAsync("https://localhost:7075/api/Comments", stringContent);
-			if (responseMessage.IsSuccessStatusCode)
-			{
-				return RedirectToAction("Index","ProductList");
-			}
+		    await _commentService.CreateCommentAsync(createCommentDto);
 			
 			return View("Index","ProductList");
 		}

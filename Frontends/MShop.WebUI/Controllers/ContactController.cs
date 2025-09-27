@@ -29,13 +29,13 @@ namespace MShop.WebUI.Controllers
 		}
 
 		[HttpPost]
-		public async Task<IActionResult> CreateContact(CreateContactDto createContactDto)
+		public async Task<IActionResult> CreateContact(CreateContactDto ContactDtos)
 		{
-			createContactDto.MessageTime= DateTime.Now;
+			ContactDtos.MessageTime = DateTime.Now;
 
-			await _contactService.CreateContactAsync(createContactDto);
+			await _contactService.CreateContactAsync(ContactDtos);
 
-			return View("Index","Contact");
+			return RedirectToAction("Index");
 		}
 	}
 }
