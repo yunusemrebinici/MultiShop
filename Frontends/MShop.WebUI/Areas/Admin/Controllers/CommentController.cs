@@ -1,6 +1,7 @@
 ﻿using Frontends.DTO.CATALOG.CommentDTOS;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using MShop.WebUI.Services.CommentServices;
 using Newtonsoft.Json;
 using System.Text;
 
@@ -11,80 +12,57 @@ namespace MShop.WebUI.Areas.Admin.Controllers
 	[Route("Admin/[Controller]/[Action]")]
 	public class CommentController : Controller
 	{
-		private readonly IHttpClientFactory _httpClientFactory;
+		private readonly ICommentService _commentService;
 
-		public CommentController(IHttpClientFactory httpClientFactory)
+		public CommentController(ICommentService commentService)
 		{
-			_httpClientFactory = httpClientFactory;
+			_commentService = commentService;
 		}
 
 		public async Task<IActionResult> Index()
 		{
-			var client = _httpClientFactory.CreateClient();
-			var responseMessage = await client.GetAsync("https://localhost:7075/api/Comments");
-			if (responseMessage.IsSuccessStatusCode)
-			{
-				var json = await responseMessage.Content.ReadAsStringAsync();
-				var values = JsonConvert.DeserializeObject<List<ResultCommentDto>>(json);
-				return View(values);
-			}
-			return View();
+			var values = await _commentService.GetAllCommentAsync();
+			return View(values);
 		}
 
 		[HttpGet("{id}")]
 		public async Task<IActionResult>CommentByProduct(string id)
 		{
-			var client = _httpClientFactory.CreateClient();
-			var responseMessage = await client.GetAsync("https://localhost:7075/api/Comments/GetCommentsByProductId/"+id);
-			if (responseMessage.IsSuccessStatusCode)
-			{
-				var json = await responseMessage.Content.ReadAsStringAsync();
-				var values = JsonConvert.DeserializeObject<List<ResultCommentDto>>(json);
-				return View(values);
-			}
-			return View();
+			var values= await _commentService.GetCommentsByProductIdAsync(id);
+			return View(values);
 		}
 
 		[HttpGet("{id}")]
 		public async Task<IActionResult> UpdateComment(string id)
 		{
-			var client = _httpClientFactory.CreateClient();
-			var responseMessage = await client.GetAsync("https://localhost:7075/api/Comments/" + id);
-			if (responseMessage.IsSuccessStatusCode)
-			{
-				var json = await responseMessage.Content.ReadAsStringAsync();
-				var values = JsonConvert.DeserializeObject<UpdateCommentDto>(json);
-				return View(values);
-			}
+			var values = await _commentService.GetCommentAsync(id);
 
-			return View();
+
+			return View(new UpdateCommentDto()
+			{
+				ReviewID=values.ReviewID,
+				ProductId=values.ProductId,
+				Status=values.Status,
+				Comments=values.Comments,
+				Date = values.date,
+				ImageUrl=values.ImageUrl,
+				Name=values.Name,
+				Point = values.Point
+				
+			});
 		}
 
 		[HttpPost("{id}")]
 		public async Task<IActionResult> UpdateComment(UpdateCommentDto updateCommentDto)
 		{
-			updateCommentDto.Date.ToString("dd-MMM-yyy");
-			var client = _httpClientFactory.CreateClient();
-			var json = JsonConvert.SerializeObject(updateCommentDto);
-			StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
-			var responseMessage = await client.PutAsync("https://localhost:7075/api/Comments", content);
-			if (responseMessage.IsSuccessStatusCode)
-			{
-				return RedirectToAction("Index");
-			}
-
-			return View();
+			await _commentService.UpdateCommentAsync(updateCommentDto);
+			return RedirectToAction("Index");
 		}
 
 		[HttpGet("{id}")]
 		public async Task<IActionResult> DeleteComment(int id)
 		{
-			var client = _httpClientFactory.CreateClient();
-			var responseMessage = await client.DeleteAsync("https://localhost:7075/api/Comments/" + id);
-			if (responseMessage.IsSuccessStatusCode)
-			{
-				return RedirectToAction("Index");
-			}
+			await _commentService.DeleteCommentAsync(id);
 			return View();
 		}
 
@@ -92,12 +70,7 @@ namespace MShop.WebUI.Areas.Admin.Controllers
 		public async Task<IActionResult> ActiveCommentStatus(int id)
 		{
 
-			var client = _httpClientFactory.CreateClient();
-			var responseMessage = await client.GetAsync("https://localhost:7075/api/Comments/ActiveComment/" + id);
-			if (responseMessage.IsSuccessStatusCode)
-			{
-				return RedirectToAction("Index");
-			}
+			await _commentService.ActiveCommentAsync(id);
 			return View();
 		}
 
@@ -105,12 +78,7 @@ namespace MShop.WebUI.Areas.Admin.Controllers
 		public async Task<IActionResult> PassiveCommentStatus(int id)
 		{
 
-			var client = _httpClientFactory.CreateClient();
-			var responseMessage = await client.GetAsync("https://localhost:7075/api/Comments/PassiveComment/" + id);
-			if (responseMessage.IsSuccessStatusCode)
-			{
-				return RedirectToAction("Index");
-			}
+			await _commentService.PassiveCommentAsync(id);
 			return View();
 		}
 	}

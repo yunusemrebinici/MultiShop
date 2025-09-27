@@ -1,59 +1,43 @@
 ﻿
 using Frontends.DTO.CATALOG.ContactDTOS;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using MShop.WebUI.Services.CatalogServices.ContactServices;
 using Newtonsoft.Json;
 
 namespace MShop.WebUI.Areas.Admin.Controllers
 {
+	[Authorize]
 	[Area("Admin")]
 	[Route("Admin/[Controller]/[Action]")]
 	public class ContactController : Controller
 	{
-		private readonly IHttpClientFactory _httpClientFactory;
+		private readonly IContactService _contactService;
 
-		public ContactController(IHttpClientFactory httpClientFactory)
+		public ContactController(IContactService contactService)
 		{
-			_httpClientFactory = httpClientFactory;
+			_contactService = contactService;
 		}
 
 		public async Task<IActionResult> Index()
 		{
-			var client = _httpClientFactory.CreateClient();
-			var responseMessage = await client.GetAsync("https://localhost:7070/api/Contacts");
-			if (responseMessage.IsSuccessStatusCode)
-			{
-				var json = await responseMessage.Content.ReadAsStringAsync();
-				var values = JsonConvert.DeserializeObject<List<ResultContactDto>>(json);
-				return View(values);
-			}
-			return View();
+			var values= await _contactService.GettAllContactAsync();
+			return View(values);
 		}
 
 		[HttpGet("{id}")]
 		public async Task<IActionResult> ContactDetail(string id)
 		{
-			var client = _httpClientFactory.CreateClient();
-			var responseMessage = await client.GetAsync("https://localhost:7070/api/Contacts/" + id);
-			if (responseMessage.IsSuccessStatusCode)
-			{
-				var json = await responseMessage.Content.ReadAsStringAsync();
-				var values = JsonConvert.DeserializeObject<ResultContactDto>(json);
-				return View(values);
-			}
+			var values = await _contactService.GetContactAsync(id);
 
-			return View();
+			return View(values);
 		}
 
 		[HttpGet("{id}")]
 		public async Task<IActionResult> DeleteContact(string id)
 		{
-			var client = _httpClientFactory.CreateClient();
-			var responseMessage = await client.DeleteAsync("https://localhost:7070/api/Contacts/" + id);
-			if (responseMessage.IsSuccessStatusCode)
-			{
-				return RedirectToAction("Index");
-			}
-			return View();
+			await _contactService.DeleteContactAsync(id);
+			return RedirectToAction("Index");
 		}
 	}
 }

@@ -1,11 +1,13 @@
 ﻿using Comment.Api.CommentDTOS;
 using Comment.Api.Concrete;
 using Comment.Api.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Comment.Api.Controllers
 {
+	[Authorize]
 	[Route("api/[controller]")]
 	[ApiController]
 	public class CommentsController : ControllerBase

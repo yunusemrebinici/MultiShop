@@ -1,5 +1,6 @@
 ﻿using Frontends.DTO.CATALOG.ContactDTOS;
 using Microsoft.AspNetCore.Mvc;
+using MShop.WebUI.Services.CatalogServices.ContactServices;
 using Newtonsoft.Json;
 using System.Net.Http;
 using System.Text;
@@ -8,11 +9,11 @@ namespace MShop.WebUI.Controllers
 {
 	public class ContactController : Controller
 	{
-		private readonly IHttpClientFactory _httpClientFactory;
+		private readonly IContactService _contactService;
 
-		public ContactController(IHttpClientFactory httpClientFactory)
+		public ContactController(IContactService contactService)
 		{
-			_httpClientFactory = httpClientFactory;
+			_contactService = contactService;
 		}
 
 		public IActionResult Index()
@@ -31,14 +32,8 @@ namespace MShop.WebUI.Controllers
 		public async Task<IActionResult> CreateContact(CreateContactDto createContactDto)
 		{
 			createContactDto.MessageTime= DateTime.Now;
-			var client = _httpClientFactory.CreateClient();
-			var json = JsonConvert.SerializeObject(createContactDto);
-			StringContent stringContent = new StringContent(json, Encoding.UTF8, "application/json");
-			var responseMessage = await client.PostAsync("https://localhost:7070/api/Contacts", stringContent);
-			if (responseMessage.IsSuccessStatusCode)
-			{
-				return RedirectToAction("Index");
-			}
+
+			await _contactService.CreateContactAsync(createContactDto);
 
 			return View("Index","Contact");
 		}
