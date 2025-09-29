@@ -42,10 +42,10 @@ namespace Basket.WebApi.Controllers
 			return Ok("Sepetteki değişikler kaydedildi.");
 		}
 
-		[HttpDelete]
-		public async Task<IActionResult> DeleteBasket()
+		[HttpDelete("{id}")]
+		public async Task<IActionResult> DeleteBasket(string id)
 		{
-			await _basketService.DeleteBasket(_loginService.GetUserId);
+			await _basketService.DeleteBasket(id);
 			return Ok("Sepet Başarıyla Silindi");
 		}
 	}
