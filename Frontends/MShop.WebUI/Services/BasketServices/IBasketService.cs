@@ -6,7 +6,7 @@ namespace MShop.WebUI.Services.BasketServices
 	{
 		Task<BasketTotalDto> GetBasket();
 
-		Task SaveBasket(BasketTotalDto basketTotalDto);
+		Task SaveBasket(BasketItemDto basketItemDto);
 
 		Task DeleteBasket(string userId);
 	}

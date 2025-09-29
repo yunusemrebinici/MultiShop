@@ -23,9 +23,22 @@ namespace MShop.WebUI.Services.BasketServices
 			return values;
 		}
 
-		public async Task SaveBasket(BasketTotalDto basketTotalDto)
+		public async Task SaveBasket(BasketItemDto basketItemDto)
 		{
-			await _httpClient.PostAsJsonAsync<BasketTotalDto>("Baskets", basketTotalDto);
+			var values = await GetBasket();
+			if (values != null)
+			{
+				if (!values.BasketItems.Any(x => x.ProductId == basketItemDto.ProductId))
+				{
+					values.BasketItems.Add(basketItemDto);
+				}
+				else
+				{
+					values = new BasketTotalDto();
+					values.BasketItems.Add(basketItemDto);
+				}
+			}
+			
 		}
 	}
 }

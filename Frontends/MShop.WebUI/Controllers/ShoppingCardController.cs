@@ -1,16 +1,19 @@
 ﻿using Frontends.DTO.BASKET;
 using Microsoft.AspNetCore.Mvc;
 using MShop.WebUI.Services.BasketServices;
+using MShop.WebUI.Services.CatalogServices.ProductServices;
 
 namespace MShop.WebUI.Controllers
 {
 	public class ShoppingCardController : Controller
 	{
 		private readonly IBasketService _basketService;
+		private readonly IProductService _productService;
 
-		public ShoppingCardController(IBasketService basketService)
+		public ShoppingCardController(IBasketService basketService, IProductService productService)
 		{
 			_basketService = basketService;
+			_productService = productService;
 		}
 
 		public IActionResult Index()
@@ -26,10 +29,20 @@ namespace MShop.WebUI.Controllers
 		}
 
 		[HttpPost]
-		public async Task<IActionResult> AddBasket(BasketTotalDto basketTotalDto)
+		public async Task<IActionResult> AddBasket(string id)
 		{
-			await _basketService.SaveBasket(basketTotalDto);
-			return RedirectToAction("Index");
+			var values = await _productService.GetByIdProductAsync(id);
+			var items = new BasketItemDto
+			{
+				ProductId = values.ProductID,
+				ProductName = values.ProductName,
+				Price = values.ProductPrice,
+				Quantity = 1,
+				ProductImageUrl = values.ProductImageUrl
+			};
+			await _basketService.SaveBasket(items);
+			return RedirectToAction("Index"); 
+			
 		}
 	}
 }
