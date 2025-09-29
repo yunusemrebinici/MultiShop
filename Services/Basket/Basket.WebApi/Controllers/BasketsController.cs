@@ -21,11 +21,11 @@ namespace Basket.WebApi.Controllers
 			_loginService = loginService;
 		}
 
-		[HttpGet("{id}")]
-		public async Task<IActionResult> GetBasketDetail(string id)
+		[HttpGet]
+		public async Task<IActionResult> GetBasketDetail()
 		{
-			var user = User.Claims;
-			var deneme = _loginService.GetUserId;
+		
+			var id = _loginService.GetUserId;
 			var values = await _basketService.GetBasket(id);
 			if (values != null)
 			{
@@ -42,10 +42,10 @@ namespace Basket.WebApi.Controllers
 			return Ok("Sepetteki değişikler kaydedildi.");
 		}
 
-		[HttpDelete("{id}")]
-		public async Task<IActionResult> DeleteBasket(string id)
+		[HttpDelete]
+		public async Task<IActionResult> DeleteBasket()
 		{
-			await _basketService.DeleteBasket(id);
+			await _basketService.DeleteBasket(_loginService.GetUserId);
 			return Ok("Sepet Başarıyla Silindi");
 		}
 	}

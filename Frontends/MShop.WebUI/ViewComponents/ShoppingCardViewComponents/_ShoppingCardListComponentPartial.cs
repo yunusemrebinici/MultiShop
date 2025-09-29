@@ -15,22 +15,16 @@ namespace MShop.WebUI.ViewComponents.ShoppingCardViewComponents
 
 		public async Task<IViewComponentResult> InvokeAsync()
 		{
-			var userId = UserClaimsPrincipal.Claims.FirstOrDefault().Value;
-			var values = await _basketService.GetBasket(userId);
-			List<BasketTotalDto> list = new List<BasketTotalDto>() {
-
-		new BasketTotalDto()
-		{
-			UserId = values.UserId,
-			BasketItems=values.BasketItems,
-			DiscountRate=values.DiscountRate,
-			DiscountCode=values.DiscountCode,
 			
+			var values = await _basketService.GetBasket();
+			var basketItem = values.BasketItems;
+			return View(basketItem);
+
 		}
 
-			};
+			
 
-			return View(list);
-		}
+			
+		
 	}
 }

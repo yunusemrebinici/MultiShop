@@ -1,4 +1,4 @@
-﻿@model List<BasketTotalDto>
+﻿@model List<BasketItemDto>
 <div class="col-lg-8 table-responsive mb-5">
 	<table class="table table-light table-borderless table-hover text-center mb-0">
 		<thead class="thead-dark">
@@ -16,8 +16,8 @@
 				@foreach (var item in Model)
 				{
 					<tr>
-						<td class="align-middle"><img src="~/UI/img/product-1.jpg" alt="" style="width: 50px;"> @item.BasketItems.Select(x => x.ProductName).FirstOrDefault()</td>
-						<td class="align-middle">@item.BasketItems.Select(x => x.Price).FirstOrDefault()</td>
+						<td class="align-middle"><img src="~/UI/img/product-1.jpg" alt="" style="width: 50px;">@item.ProductName</td>
+						<td class="align-middle">@item.Price</td>
 						<td class="align-middle">
 							<div class="input-group quantity mx-auto" style="width: 100px;">
 								<div class="input-group-btn">
@@ -33,8 +33,8 @@
 								</div>
 							</div>
 						</td>
-						<td class="align-middle">@item.TotalPrice</td>
-						<td class="align-middle"><a href="/ShoppingCard/RemoveBasket/@item.UserId" class="btn btn-sm btn-danger"><i class="fa fa-times"></i></a></td>
+						<td class="align-middle">@item.Quantity</td>
+						<td class="align-middle"><a href="/ShoppingCard/RemoveBasket/@item.ProductId" class="btn btn-sm btn-danger"><i class="fa fa-times"></i></a></td>
 					</tr>
 				}
 

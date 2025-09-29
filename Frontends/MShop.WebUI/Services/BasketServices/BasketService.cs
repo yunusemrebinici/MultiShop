@@ -11,15 +11,15 @@ namespace MShop.WebUI.Services.BasketServices
 			_httpClient = httpClient;
 		}
 
-		public async Task DeleteBasket(string userId)
+		public async Task DeleteBasket(string id)
 		{
-			await _httpClient.DeleteAsync($"Baskets/{userId}");
+			await _httpClient.DeleteAsync($"Baskets/{id}");
 		}
 
-		public async Task<BasketTotalDto> GetBasket(string id)
+		public async Task<BasketTotalDto> GetBasket()
 		{
 			
-			var values= await _httpClient.GetFromJsonAsync<BasketTotalDto>($"Baskets/{id}");
+			var values= await _httpClient.GetFromJsonAsync<BasketTotalDto>("Baskets");
 			return values;
 		}
 
