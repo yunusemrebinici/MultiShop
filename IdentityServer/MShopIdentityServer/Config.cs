@@ -19,6 +19,7 @@ namespace MShopIdentityServer
 		   new ApiResource("ResourceDiscount"){Scopes={"DiscountFullPermission"}},
 		   new ApiResource("ResourceOrder"){Scopes={"OrderFullPermission"}},
 		   new ApiResource("ResourceCargo"){Scopes={"CargoFullPermission"}},
+		   new ApiResource("ResourceBasket"){Scopes={"BasketFullPermission"}},
 		   new ApiResource("ResourceComment"){Scopes={"CommentFullPermission"}},
 		   new ApiResource("ResourceOcelot"){Scopes={"OcelotFullPermission"}},
 		   new ApiResource(IdentityServerConstants.LocalApi.ScopeName)

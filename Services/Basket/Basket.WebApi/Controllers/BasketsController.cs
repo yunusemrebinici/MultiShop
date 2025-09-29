@@ -1,11 +1,13 @@
 ﻿using Basket.WebApi.Dtos;
 using Basket.WebApi.LoginServices;
 using Basket.WebApi.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Basket.WebApi.Controllers
 {
+	[Authorize]
 	[Route("api/[controller]")]
 	[ApiController]
 	public class BasketsController : ControllerBase
@@ -19,12 +21,17 @@ namespace Basket.WebApi.Controllers
 			_loginService = loginService;
 		}
 
-		[HttpGet]
-		public async Task<IActionResult> GetBasketDetail()
+		[HttpGet("{id}")]
+		public async Task<IActionResult> GetBasketDetail(string id)
 		{
 			var user = User.Claims;
-			var values = await _basketService.GetBasket(_loginService.GetUserId);
-			return Ok(values);
+			var deneme = _loginService.GetUserId;
+			var values = await _basketService.GetBasket(id);
+			if (values != null)
+			{
+				return Ok(values);
+			}
+			return Ok("Sepet Boş");
 		}
 
 		[HttpPost]

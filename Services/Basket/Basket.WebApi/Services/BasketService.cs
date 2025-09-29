@@ -13,21 +13,35 @@ namespace Basket.WebApi.Services
 			_redisService = redisService;
 		}
 
-		public async Task DeleteBasket(string userId)
+		public async Task DeleteBasket(string id)
 		{
-			var status= await _redisService.GetDb().KeyDeleteAsync(userId);
+			var status = await _redisService.GetDb().KeyDeleteAsync(id);
 		}
 
-		public async Task<BasketTotalDto> GetBasket(string userId)
+		public async Task<BasketTotalDto> GetBasket(string id)
 		{
-		    var existBasket= await _redisService.GetDb().StringGetAsync(userId);
-			return JsonSerializer.Deserialize<BasketTotalDto>(existBasket);
-		
+
+			var existBasket = await _redisService.GetDb().StringGetAsync(id);
+			if (existBasket.IsNull==true)
+			{
+
+				return null;
+
+			}
+			else
+			{
+				var values = JsonSerializer.Deserialize<BasketTotalDto>(existBasket);
+				
+				return values;
+			}
+
+
+			
 		}
 
 		public async Task SaveBasket(BasketTotalDto basketTotalDto)
 		{
-			await _redisService.GetDb().StringSetAsync(basketTotalDto.UserId,JsonSerializer.Serialize(basketTotalDto));
+			await _redisService.GetDb().StringSetAsync(basketTotalDto.UserId, JsonSerializer.Serialize(basketTotalDto));
 		}
 	}
 }
