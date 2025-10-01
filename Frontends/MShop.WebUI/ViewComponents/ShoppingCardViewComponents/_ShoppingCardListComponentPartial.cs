@@ -20,11 +20,7 @@ namespace MShop.WebUI.ViewComponents.ShoppingCardViewComponents
 			var basketItem = values.BasketItems;
 			return View(basketItem);
 
-		}
-
-			
-
-			
+		}					
 		
 	}
 }

@@ -16,33 +16,32 @@ namespace MShop.WebUI.Controllers
 			_productService = productService;
 		}
 
-		public IActionResult Index()
+		public async Task<IActionResult> Index()
 		{
+			var values = await _basketService.GetBasket();
 			return View();
 		}
 
-		
-		public async Task <IActionResult>RemoveBasket(string id)
+		public async Task<IActionResult> AddBasketItem(string productId)
 		{
-			await _basketService.DeleteBasket(id);
-			return RedirectToAction("Index");
-		}
-
-		[HttpPost]
-		public async Task<IActionResult> AddBasket(string id)
-		{
-			var values = await _productService.GetByIdProductAsync(id);
-			var items = new BasketItemDto
+			var values = await _productService.GetByIdProductAsync(productId);
+			var Items = new BasketItemDto()
 			{
 				ProductId = values.ProductID,
 				ProductName = values.ProductName,
 				Price = values.ProductPrice,
-				Quantity = 1,
-				ProductImageUrl = values.ProductImageUrl
+				ProductImageUrl = values.ProductImageUrl,
+				Quantity = 1
 			};
-			await _basketService.SaveBasket(items);
-			return RedirectToAction("Index"); 
-			
+			await _basketService.AddBasketItem(Items);
+			return RedirectToAction("Index", "ProductList");
+
+		}
+
+		public async Task<IActionResult>RemoveBasketItem(string productId)
+		{
+			await _basketService.RemoveBasketItem(productId);
+			return RedirectToAction("Index");
 		}
 	}
 }
