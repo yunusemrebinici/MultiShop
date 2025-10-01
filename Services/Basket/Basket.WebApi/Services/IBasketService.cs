@@ -4,7 +4,7 @@ namespace Basket.WebApi.Services
 {
 	public interface IBasketService
 	{
-		Task<BasketTotalDto> GetBasket(string userId);
+		Task<BasketTotalDto> GetBasket(string id);
 
 		Task SaveBasket(BasketTotalDto basketTotalDto);
 

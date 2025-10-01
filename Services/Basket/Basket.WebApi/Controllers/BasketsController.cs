@@ -21,17 +21,17 @@ namespace Basket.WebApi.Controllers
 			_loginService = loginService;
 		}
 
-		[HttpGet]
+		[HttpGet("GetBasketDetail")]
 		public async Task<IActionResult> GetBasketDetail()
 		{
-		
-			var id = _loginService.GetUserId;
+
+			var id =  _loginService.GetUserId;
 			var values = await _basketService.GetBasket(id);
 			if (values != null)
 			{
 				return Ok(values);
 			}
-			return Ok("Sepet Boş");
+			return Ok(new BasketItemDto());
 		}
 
 		[HttpPost]

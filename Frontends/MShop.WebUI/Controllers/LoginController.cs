@@ -31,54 +31,54 @@ namespace MShop.WebUI.Controllers
 			return View();
 		}
 
-		[HttpPost]
-		public async Task<IActionResult> Index(UserLoginDto userLoginDto)
-		{
-			var client = _httpClientFactory.CreateClient();
-			var content = new StringContent(JsonSerializer.Serialize(userLoginDto), Encoding.UTF8, "application/json");
-			var response = await client.PostAsync("http://localhost:5001/api/Logins", content);
-			if (response.IsSuccessStatusCode)
-			{
-				var jsonData = await response.Content.ReadAsStringAsync();
-				JwtResponseModel tokenModel = null;
+		//[HttpPost]
+		//public async Task<IActionResult> Index(UserLoginDto userLoginDto)
+		//{
+		//	var client = _httpClientFactory.CreateClient();
+		//	var content = new StringContent(JsonSerializer.Serialize(userLoginDto), Encoding.UTF8, "application/json");
+		//	var response = await client.PostAsync("http://localhost:5001/api/Logins", content);
+		//	if (response.IsSuccessStatusCode)
+		//	{
+		//		var jsonData = await response.Content.ReadAsStringAsync();
+		//		JwtResponseModel tokenModel = null;
 
-				try
-				{
-					 tokenModel = JsonSerializer.Deserialize<JwtResponseModel>(jsonData, new JsonSerializerOptions
-					{
-						PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+		//		try
+		//		{
+		//			 tokenModel = JsonSerializer.Deserialize<JwtResponseModel>(jsonData, new JsonSerializerOptions
+		//			{
+		//				PropertyNamingPolicy = JsonNamingPolicy.CamelCase
 						
-					});
+		//			});
 					
-				}
-				catch (Exception)
-				{
+		//		}
+		//		catch (Exception)
+		//		{
 
-					return View();
-				}
+		//			return View();
+		//		}
 				
 
-				if (tokenModel !=null)
-				{
-					JwtSecurityTokenHandler handler = new JwtSecurityTokenHandler();
-					var token = handler.ReadJwtToken(tokenModel.Token);
-					var claims = token.Claims.ToList();
-					if (claims != null)
-					{
-						claims.Add(new Claim("multishoptoken",tokenModel.Token));
-						var claimsIdentity=new ClaimsIdentity(claims,JwtBearerDefaults.AuthenticationScheme);
-						var authProps = new AuthenticationProperties
-						{
-							ExpiresUtc = tokenModel.ExpireDate,
-							IsPersistent = true,
-						};
-						await HttpContext.SignInAsync(JwtBearerDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity), authProps);
-						return RedirectToAction("Index", "Default");
-					}
-				}
-			}
-			return View();
-		}
+		//		if (tokenModel !=null)
+		//		{
+		//			JwtSecurityTokenHandler handler = new JwtSecurityTokenHandler();
+		//			var token = handler.ReadJwtToken(tokenModel.Token);
+		//			var claims = token.Claims.ToList();
+		//			if (claims != null)
+		//			{
+		//				claims.Add(new Claim("multishoptoken",tokenModel.Token));
+		//				var claimsIdentity=new ClaimsIdentity(claims,JwtBearerDefaults.AuthenticationScheme);
+		//				var authProps = new AuthenticationProperties
+		//				{
+		//					ExpiresUtc = tokenModel.ExpireDate,
+		//					IsPersistent = true,
+		//				};
+		//				await HttpContext.SignInAsync(JwtBearerDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity), authProps);
+		//				return RedirectToAction("Index", "Default");
+		//			}
+		//		}
+		//	}
+		//	return View();
+		//}
 
 		[HttpGet]
 		public async Task<IActionResult> SignIn()
@@ -89,10 +89,15 @@ namespace MShop.WebUI.Controllers
 		[HttpPost]
 		public async Task<IActionResult>SignIn(SignUpDto signUp)
 		{
-			signUp.UserName = "emre01";
-			signUp.Password = "123456Emre.";
-	         await _identityService.SignIn(signUp);
-			return RedirectToAction("Index", "ShoppingCard");
+	        var response=  await _identityService.SignIn(signUp);
+			if (response==true)
+			{
+				return RedirectToAction("Index", "Default");
+			}
+			else
+			{
+				return View();
+			}
 		}
 	}
 }

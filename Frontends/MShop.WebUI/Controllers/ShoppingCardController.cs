@@ -18,7 +18,7 @@ namespace MShop.WebUI.Controllers
 
 		public async Task<IActionResult> Index()
 		{
-			var values = await _basketService.GetBasket();
+			
 			return View();
 		}
 

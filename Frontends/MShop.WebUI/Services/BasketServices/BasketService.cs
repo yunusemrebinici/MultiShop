@@ -32,14 +32,15 @@ namespace MShop.WebUI.Services.BasketServices
 
 		public async Task DeleteBasket()
 		{
-			await _httpClient.DeleteAsync("Baskets");
+			await _httpClient.DeleteAsync("basket");
 		}
 
 		public async Task<BasketTotalDto> GetBasket()
 		{
 			
-			var response= await _httpClient.GetAsync("Baskets");
+			var response = await _httpClient.GetAsync("http://localhost:7074/api/Baskets/GetBasketDetail");
 			var values = await response.Content.ReadFromJsonAsync<BasketTotalDto>();
+			int s = 5;
 			return values;
 		}
 
@@ -54,7 +55,7 @@ namespace MShop.WebUI.Services.BasketServices
 
 		public async Task SaveBasket(BasketTotalDto basketTotalDto)
 		{
-			await _httpClient.PostAsJsonAsync<BasketTotalDto>("baskets", basketTotalDto);
+			await _httpClient.PostAsJsonAsync<BasketTotalDto>("basket", basketTotalDto);
 			
 		}
 	}

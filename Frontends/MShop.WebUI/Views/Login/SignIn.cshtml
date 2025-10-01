@@ -21,14 +21,14 @@
 			<div class="form-left">
 				<img src="~/register/images/form-v6.jpg" alt="form">
 			</div>
-			<form class="form-detail" action="#" method="post">
+			<form class="form-detail" asp-controller="Login" method="post">
 				<h2>Giriş Formu</h2>
 				<div class="form-row">
-					<input type="text" asp-for="UserName" id="full-name" class="input-text" placeholder="Kullanıcı Adı">
+					<input type="text" asp-for="UserName"  class="input-text" placeholder="Kullanıcı Adı">
 				</div>
 
 				<div class="form-row">
-					<input type="password" asp-for="Password" id="password" class="input-text" placeholder="Şifre">
+					<input type="password" asp-for="Password"  class="input-text" placeholder="Şifre">
 				</div>
 
 				<div class="form-row-last">

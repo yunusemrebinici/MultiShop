@@ -11,12 +11,12 @@
 			</tr>
 		</thead>
 		<tbody class="align-middle">
-			@if (Model.Count>0)
+			@if (Model.Select(x=>x.Quantity).FirstOrDefault()>0)
 			{
 				@foreach (var item in Model)
 				{
 					<tr>
-						<td class="align-middle"><img src="~/UI/img/product-1.jpg" alt="" style="width: 50px;">@item.ProductName</td>
+						<td class="align-middle"><img src="@item.ProductImageUrl" alt="" style="width: 50px;">@item.ProductName</td>
 						<td class="align-middle">@item.Price</td>
 						<td class="align-middle">
 							<div class="input-group quantity mx-auto" style="width: 100px;">
