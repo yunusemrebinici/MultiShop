@@ -22,9 +22,9 @@ namespace MShop.WebUI.Controllers
 			return View();
 		}
 
-		public async Task<IActionResult> AddBasketItem(string productId)
+		public async Task<IActionResult> AddBasketItem(string id)
 		{
-			var values = await _productService.GetByIdProductAsync(productId);
+			var values = await _productService.GetByIdProductAsync(id);
 			var Items = new BasketItemDto()
 			{
 				ProductId = values.ProductID,
