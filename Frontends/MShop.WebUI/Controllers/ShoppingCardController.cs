@@ -38,9 +38,9 @@ namespace MShop.WebUI.Controllers
 
 		}
 
-		public async Task<IActionResult>RemoveBasketItem(string productId)
+		public async Task<IActionResult>RemoveBasketItem(string id)
 		{
-			await _basketService.RemoveBasketItem(productId);
+			await _basketService.RemoveBasketItem(id);
 			return RedirectToAction("Index");
 		}
 	}

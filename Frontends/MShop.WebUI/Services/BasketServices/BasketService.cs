@@ -68,10 +68,10 @@ namespace MShop.WebUI.Services.BasketServices
 			return values;
 		}
 
-		public async Task<bool> RemoveBasketItem(string productId)
+		public async Task<bool> RemoveBasketItem(string id)
 		{
 			var values = await GetBasket();
-			var deleteItem = values.BasketItems.FirstOrDefault(x => x.ProductId == productId);
+			var deleteItem = values.BasketItems.FirstOrDefault(x => x.ProductId == id);
 			var result = values.BasketItems.Remove(deleteItem);
 			await SaveBasket(values);
 			return true;
