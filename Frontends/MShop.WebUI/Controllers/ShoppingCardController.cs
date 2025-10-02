@@ -18,7 +18,14 @@ namespace MShop.WebUI.Controllers
 
 		public async Task<IActionResult> Index()
 		{
-			
+			var total = await _basketService.GetBasket();
+			var max = total.BasketItems.Sum(x => x.Price);
+			var kdv = max / 10;
+			ViewBag.SumPrice = max;
+			ViewBag.Kdv = kdv;
+			ViewBag.TotalPrice = (max)-(kdv);
+		
+
 			return View();
 		}
 
