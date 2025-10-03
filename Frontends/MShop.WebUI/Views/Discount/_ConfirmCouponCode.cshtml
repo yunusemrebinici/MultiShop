@@ -1,7 +1,7 @@
 ﻿<div class="col-lg-4">
-    <form class="mb-30" action="">
+    <form class="mb-30" asp-controller="Discount" method="post" asp-action="_ConfirmCouponCode">
         <div class="input-group">
-            <input type="text" class="form-control border-0 p-4" placeholder="Kupon Kodu">
+            <input type="text" class="form-control border-0 p-4" name="couponCode" placeholder="Kupon Kodu">
             <div class="input-group-append">
                 <button class="btn btn-primary">Kuponu Uygula</button>
             </div>
@@ -17,6 +17,10 @@
             <div class="d-flex justify-content-between">
                 <h6 class="font-weight-medium">Kdv</h6>
                 <h6 class="font-weight-medium">$@ViewBag.Kdv</h6>
+            </div>
+            <div class="d-flex justify-content-between">
+                <h6 class="font-weight-medium">İndirim</h6>
+                <h6 class="font-weight-medium">$@ViewBag.Rate</h6>
             </div>
         </div>
         <div class="pt-2">

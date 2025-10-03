@@ -1,6 +1,6 @@
-﻿using M.Shop.Discount.Dtos;
+﻿using Frontends.DTO.DİSCOUNT;
 
-namespace M.Shop.Discount.Services
+namespace MShop.WebUI.Services.DiscountServices
 {
 	public interface IDiscountService
 	{
@@ -9,6 +9,6 @@ namespace M.Shop.Discount.Services
 		Task CreateCouponAsync(CreateCouponDto couponDto);
 		Task UpdateCouponAsync(UpdateCouponDto couponDto);
 		Task DeleteCouponAsync(int id);
-		Task <int> GetCouponRate(string couponCode);
+		Task<int> GetCouponRate(string couponCode);
 	}
 }

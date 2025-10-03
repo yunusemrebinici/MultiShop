@@ -26,6 +26,13 @@ namespace M.Shop.Discount.Controllers
 			return Ok(await _discountService.GettAllCouponAsync());
 		}
 
+		[HttpGet("GetCouponRate/{couponCode}")]
+		public async Task<IActionResult> GetCouponRate(string couponCode)
+		{
+			int rate = await _discountService.GetCouponRate(couponCode);
+			return Ok(rate);
+		}
+
 		[HttpGet("{id}")]
 		public async Task<IActionResult> GetCouponById(int id)
 		{

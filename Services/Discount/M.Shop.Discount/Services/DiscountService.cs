@@ -40,6 +40,18 @@ namespace M.Shop.Discount.Services
 			};
 		}
 
+		public async Task<int> GetCouponRate(string couponCode)
+		{
+			var query = "Select Rate from Coupons where Code=@p1";
+			var paramaters = new DynamicParameters();
+			paramaters.Add("@p1", couponCode);
+			using (var connection = _dapperContext.CreateConnection())
+			{
+				int rate= await connection.QueryFirstOrDefaultAsync<int>(query, paramaters);
+				return rate;
+			}
+		}
+
 		public async Task<List<ResultCouponDto>> GettAllCouponAsync()
 		{
 			var query = "Select * From Coupons";

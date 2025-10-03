@@ -1,22 +1,23 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MShop.WebUI.Services.BasketServices;
+using MShop.WebUI.Services.DiscountServices;
 
 namespace MShop.WebUI.Controllers
 {
 	public class DiscountController : Controller
 	{
 		private readonly IBasketService _basketService;
+		private readonly IDiscountService _discountService;
 
-		public DiscountController(IBasketService basketService)
+		public DiscountController(IBasketService basketService, IDiscountService discountService)
 		{
 			_basketService = basketService;
+			_discountService = discountService;
 		}
 
 		public async Task< IActionResult> Index()
 		{
-			var total = await _basketService.GetBasket();
-			ViewBag.Total = total.BasketItems.Sum(x => x.Price);
-			ViewBag.Kdv = ViewBag.Total * 0.10;
+			
 			return View();
 		}
 
@@ -28,9 +29,11 @@ namespace MShop.WebUI.Controllers
 		}
 
 		[HttpPost]
-		public async Task<IActionResult> _ConfirmCouponCode(string Couponid)
+		public async Task<IActionResult> _ConfirmCouponCode(string couponCode)
 		{
-			return RedirectToAction("Index","ShoppingCard");
+			int rate = await _discountService.GetCouponRate(couponCode);
+
+			return RedirectToAction("Index", "ShoppingCard", new {rate=rate});
 		}
 
 

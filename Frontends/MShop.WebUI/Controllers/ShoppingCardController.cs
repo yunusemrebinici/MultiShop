@@ -1,5 +1,6 @@
 ﻿using Frontends.DTO.BASKET;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using MShop.WebUI.Services.BasketServices;
 using MShop.WebUI.Services.CatalogServices.ProductServices;
 
@@ -16,14 +17,15 @@ namespace MShop.WebUI.Controllers
 			_productService = productService;
 		}
 
-		public async Task<IActionResult> Index()
+		public async Task<IActionResult> Index(int rate)
 		{
 			var total = await _basketService.GetBasket();
 			var max = total.BasketItems.Sum(x => x.Price);
 			var kdv = max / 10;
 			ViewBag.SumPrice = max;
 			ViewBag.Kdv = kdv;
-			ViewBag.TotalPrice = (max)-(kdv);
+			ViewBag.TotalPrice = (max)+(kdv)-(rate);
+			ViewBag.Rate=rate;
 		
 
 			return View();
