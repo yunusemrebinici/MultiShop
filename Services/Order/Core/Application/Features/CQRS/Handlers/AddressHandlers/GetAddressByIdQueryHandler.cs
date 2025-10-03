@@ -28,8 +28,12 @@ namespace Application.Features.CQRS.Handlers.AddressHandlers
 				City = value.City,
 				Detail=value.Detail,
 				District = value.District,
-				UserId = value.UserId
-				
+				UserId = value.UserId,
+				UserSurname = value.UserName,
+				Description = value.Description,
+				Email = value.Email,
+				Phone = value.Phone,
+				UserName = value.UserName		
 			} ;
 		}
 	}

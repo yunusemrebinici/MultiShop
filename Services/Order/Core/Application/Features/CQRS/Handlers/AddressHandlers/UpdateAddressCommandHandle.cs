@@ -25,6 +25,12 @@ namespace Application.Features.CQRS.Handlers.AddressHandlers
 			value.District = update.District;
 			value.City = update.City;
 			value.UserId = update.UserId;
+			value.AddressId = update.AddressId;
+			value.UserSurname = update.UserSurname;
+			value.Email = update.Email;
+			value.Description = update.Description;
+			value.Phone = update.Phone;
+			value.UserName= update.UserName;
 			await _repository.UpdateAsync(value);
 		}
 	}

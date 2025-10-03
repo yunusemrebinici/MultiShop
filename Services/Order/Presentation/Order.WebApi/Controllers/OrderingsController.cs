@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Order.WebApi.Controllers
 {
-	[Authorize]
+	[AllowAnonymous]
 	[Route("api/[controller]")]
 	[ApiController]
 	public class OrderingsController : ControllerBase

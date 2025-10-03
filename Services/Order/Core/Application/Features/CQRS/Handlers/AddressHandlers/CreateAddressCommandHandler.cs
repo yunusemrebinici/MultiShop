@@ -27,7 +27,12 @@ namespace Application.Features.CQRS.Handlers.AddressHandlers
 				Detail=command.Detail,
 				District = command.District,
 				UserId = command.UserId,
-
+				UserSurname = command.UserSurname,
+				UserName = command.UserName,
+				Phone = command.Phone,
+				Email = command.Email,
+				Description = command.Description,
+			
 			});
 		}
 	}

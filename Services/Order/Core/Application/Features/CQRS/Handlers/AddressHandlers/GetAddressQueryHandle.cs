@@ -28,6 +28,12 @@ namespace Application.Features.CQRS.Handlers.AddressHandlers
 				Detail = x.Detail,
 				District = x.District,
 				UserId = x.UserId,
+				Description = x.Description,
+				Email = x.Email,
+				Phone = x.Phone,
+				UserName = x.UserName,
+				UserSurname = x.UserSurname	
+				
 
 			}).ToList();
 		}
