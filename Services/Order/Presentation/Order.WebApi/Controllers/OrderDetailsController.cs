@@ -18,14 +18,17 @@ namespace Order.WebApi.Controllers
 		private readonly GetOrderDetailQueryHandle _getOrderDetailQueryHandle;
 		private readonly RemoveOrderDetailCommandHandle _removeOrderDetailCommandHandler;
 		private readonly UpdateOrderDetailCommandHandle _updateOrderDetailCommandHandler;
+		private readonly GetOrderDetailByOrderingIdQueryHandler _getOrderDetailByOrderingIdQueryHandler;
 
-		public OrderDetailsController(CreateOrderDetailCommandHandle createOrderDetailCommandHandler, GetOrderDetailByIdQueryHandle getOrderDetailByIdQueryHandler, GetOrderDetailQueryHandle getOrderDetailQueryHandle, RemoveOrderDetailCommandHandle removeOrderDetailCommandHandler, UpdateOrderDetailCommandHandle updateOrderDetailCommandHandler)
+
+		public OrderDetailsController(CreateOrderDetailCommandHandle createOrderDetailCommandHandler, GetOrderDetailByIdQueryHandle getOrderDetailByIdQueryHandler, GetOrderDetailQueryHandle getOrderDetailQueryHandle, RemoveOrderDetailCommandHandle removeOrderDetailCommandHandler, UpdateOrderDetailCommandHandle updateOrderDetailCommandHandler, GetOrderDetailByOrderingIdQueryHandler getOrderDetailByOrderingIdQueryHandler)
 		{
 			_createOrderDetailCommandHandler = createOrderDetailCommandHandler;
 			_getOrderDetailByIdQueryHandler = getOrderDetailByIdQueryHandler;
 			_getOrderDetailQueryHandle = getOrderDetailQueryHandle;
 			_removeOrderDetailCommandHandler = removeOrderDetailCommandHandler;
 			_updateOrderDetailCommandHandler = updateOrderDetailCommandHandler;
+			_getOrderDetailByOrderingIdQueryHandler = getOrderDetailByOrderingIdQueryHandler;
 		}
 
 		[HttpPost]
@@ -39,6 +42,12 @@ namespace Order.WebApi.Controllers
 		public async Task<IActionResult> GetOrderDetail(int id)
 		{
 			return Ok(await _getOrderDetailByIdQueryHandler.Handle(new GetOrderDetailByIdQuery(id)));
+		}
+
+		[HttpGet("GetOrderDetailByOrderingId/{id}")]
+		public async Task<IActionResult> GetOrderDetailByOrderingId(int id)
+		{
+			return Ok(await _getOrderDetailByOrderingIdQueryHandler.Handle(id));
 		}
 
 		[HttpGet]

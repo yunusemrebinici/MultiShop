@@ -18,6 +18,7 @@ using MShop.WebUI.Services.CommentServices;
 using MShop.WebUI.Services.CatalogServices.ContactServices;
 using MShop.WebUI.Services.BasketServices;
 using MShop.WebUI.Services.DiscountServices;
+using MShop.WebUI.Services.OrderServices.Ordering;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -142,7 +143,10 @@ builder.Services.AddHttpClient<IDiscountService, DiscountService>(opt =>
 	opt.BaseAddress = new Uri($"{values.OcelotServerUrl}/{values.Discount.Path}");
 }).AddHttpMessageHandler<ClientCredentialTokenHandler>();
 
-
+builder.Services.AddHttpClient<IOrderingService, OrderingService>(opt =>
+{
+	opt.BaseAddress = new Uri($"{values.OcelotServerUrl}/{values.Order.Path}");
+}).AddHttpMessageHandler<ResourcheOwnerPasswordTokenHandler>();
 
 var app = builder.Build();
 

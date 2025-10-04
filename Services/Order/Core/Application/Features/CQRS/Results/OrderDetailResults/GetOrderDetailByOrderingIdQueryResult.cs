@@ -4,13 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Domain.Entities
+namespace Application.Features.CQRS.Results.OrderDetailResults
 {
-	public class OrderDetail
+	public class GetOrderDetailByOrderingIdQueryResult
 	{
 		public int OrderDetailId { get; set; }
 
-		public int AddressId { get; set; }
+		public int OrderingId { get; set; }
 
 		public string ProductId { get; set; }
 
@@ -22,9 +22,6 @@ namespace Domain.Entities
 
 		public decimal ProductTotalPrice { get; set; }
 
-		public int OrderingId { get; set; }
-
-		public Ordering Ordering { get; set; }
-
+		
 	}
 }

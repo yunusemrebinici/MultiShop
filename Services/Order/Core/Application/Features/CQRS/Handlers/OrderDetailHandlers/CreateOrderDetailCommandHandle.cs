@@ -28,6 +28,7 @@ namespace Application.Features.CQRS.Handlers.OrderDetailHandlers
 				ProductName = createOrderDetail.ProductName,
 				ProductPrice = createOrderDetail.ProductPrice,
 				ProductTotalPrice = createOrderDetail.ProductTotalPrice,
+				AddressId=createOrderDetail.AddressId,
 			});
 		}
 

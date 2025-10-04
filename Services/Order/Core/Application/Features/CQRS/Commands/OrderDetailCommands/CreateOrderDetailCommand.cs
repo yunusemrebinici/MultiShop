@@ -11,6 +11,8 @@ namespace Application.Features.CQRS.Commands.OrderDetailCommands
 	{
 		public string ProductId { get; set; }
 
+		public int AddressId { get; set; }
+
 		public string ProductName { get; set; }
 
 		public decimal ProductPrice { get; set; }

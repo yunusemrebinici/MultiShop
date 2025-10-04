@@ -4,15 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Domain.Entities
+namespace Frontends.DTO.ORDER.OrderDetail
 {
-	public class OrderDetail
+	public class CreateOrderDetailDto
 	{
-		public int OrderDetailId { get; set; }
-
-		public int AddressId { get; set; }
 
 		public string ProductId { get; set; }
+
+		public int AddressId { get; set; }
 
 		public string ProductName { get; set; }
 
@@ -24,7 +23,6 @@ namespace Domain.Entities
 
 		public int OrderingId { get; set; }
 
-		public Ordering Ordering { get; set; }
 
 	}
 }

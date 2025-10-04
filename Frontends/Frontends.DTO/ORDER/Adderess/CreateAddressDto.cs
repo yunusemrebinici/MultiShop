@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.Features.CQRS.Commands.AddressComands
+namespace Frontends.DTO.ORDER.Adderess
 {
-	public class CreateAddressCommand
+	public class CreateAddressDto
 	{
 
 		public string UserId { get; set; }
