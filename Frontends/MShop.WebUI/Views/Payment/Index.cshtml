@@ -1,8 +1,13 @@
-﻿
+﻿@model CreateOrderingDto
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/UILayout/_UILayout.cshtml";
 }
 
-<h1>Index</h1>
+<h1>Burası Kredi Kartı Tasarımı olacak aynı zamanda ordering oluşturlacak</h1>
 
+<form method="post"> 
+      <input type="hidden" asp-for="OrderDate" value="@DateTime.Now" />
+      <input type="hidden" asp-for="TotalPrice" value="0" />
+    <button>Devam et</button>
+</form>
