@@ -14,7 +14,7 @@ namespace MShop.WebUI.ViewComponents.OrderViewComponents
 
 		public async Task<IViewComponentResult> InvokeAsync()
 		{
-			string id = UserClaimsPrincipal.Claims.FirstOrDefault().Value;
+			
 			var values = await _basketService.GetBasket();
 			var basketItem = values.BasketItems;
 			return View(basketItem);

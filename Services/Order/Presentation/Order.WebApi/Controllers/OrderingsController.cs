@@ -19,7 +19,7 @@ namespace Order.WebApi.Controllers
 		public OrderingsController(IMediator mediator)
 		{
 			_mediator = mediator;
-		}
+		}	
 
 		[HttpGet]
 		public async Task<IActionResult> OrderingList()
