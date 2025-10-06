@@ -166,6 +166,26 @@
           "Port": 7077
         }
       ]
+    },
+    {
+      "UpstreamHttpMethod": [ "Get", "Post", "Delete", "Put" ],
+      "UpstreamPathTemplate": "/services/message/{everything}",
+      "UpstreamScheme": "http",
+
+      "AuthenticationOptions": {
+
+        "AuthenticationProviderKey": "OcelotAuthenticationScheme",
+        "AllowedScopes": [ "FullPermission" ]
+      },
+
+      "DownstreamPathTemplate": "/api/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7078
+        }
+      ]
     }
   ],
   "GlobalConfiguration": {

@@ -4,5 +4,8 @@ catalog port number 7070
 discount port number 7071
 order port number 7072
 cargo port number 7073
-basket port nuber 7074
-comment port nuber 7075
+basket port number 7074
+comment port number 7075
+payment port number 7076
+ımages port number 7077
+message port number	7078
