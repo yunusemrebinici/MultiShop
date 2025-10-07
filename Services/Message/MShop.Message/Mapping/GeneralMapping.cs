@@ -11,6 +11,7 @@ namespace MShop.Message.Mapping
 			CreateMap<UserMessage, CreateMessageDto>().ReverseMap();
 			CreateMap<UserMessage, ResultMessageDto>().ReverseMap();
 			CreateMap<UserMessage, GetMessageByUserId>().ReverseMap();
+			CreateMap<UserMessage, GetMessageDetailByMessageIdDto>().ReverseMap();
 		}
 	}
 }

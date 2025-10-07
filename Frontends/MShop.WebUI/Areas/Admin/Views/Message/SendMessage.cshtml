@@ -1,0 +1,9 @@
+﻿@model CreateMessageDto
+@{
+    ViewData["Title"] = "SendMessage";
+    Layout = "~/Areas/Admin/Views/AdminLayout/Index.cshtml";
+}
+
+<h1>SendMessage</h1>
+
+@Html.DropDownListFor(x => x.SenderId, (List<SelectListItem>)ViewBag.Receiver, new { @class = "form-control" })

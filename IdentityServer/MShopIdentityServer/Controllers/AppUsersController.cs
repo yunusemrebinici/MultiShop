@@ -37,5 +37,25 @@ namespace MShopIdentityServer.Controllers
 				UserName = user.UserName,
 			});
 		}
+
+		[HttpGet("UserList")]
+		public IActionResult UserList() // async olmasina gerek kalmadi, cünkü Users.ToList() direkt isler
+		{
+			// Tüm kullanıcılari çeker ve bir liste haline getirir.
+			var allUsers = _userManager.Users.ToList();
+
+			// Anonim tip veya DTO kullanarak sadece gerekli bilgileri seçer.
+			var userListDto = allUsers.Select(user => new
+			{
+				Id = user.Id,
+				Name = user.Name,
+				Surname = user.Surname,
+				Email = user.Email,
+				UserName = user.UserName,
+			}).ToList();
+
+			// Kullanıcı listesini döndürür.
+			return Ok(userListDto);
+		}
 	}
 }

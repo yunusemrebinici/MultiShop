@@ -167,6 +167,7 @@
         }
       ]
     },
+    //message
     {
       "UpstreamHttpMethod": [ "Get", "Post", "Delete", "Put" ],
       "UpstreamPathTemplate": "/services/message/{everything}",
@@ -175,7 +176,7 @@
       "AuthenticationOptions": {
 
         "AuthenticationProviderKey": "OcelotAuthenticationScheme",
-        "AllowedScopes": [ "FullPermission" ]
+        "AllowedScopes": [ "MessageFullPermission" ]
       },
 
       "DownstreamPathTemplate": "/api/{everything}",

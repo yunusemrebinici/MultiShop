@@ -1,0 +1,22 @@
+﻿@model GetMessageDetailByMessageIdDto
+@{
+    ViewData["Title"] = "MessageDetail";
+    Layout = "~/Areas/Admin/Views/AdminLayout/Index.cshtml";
+}
+
+
+
+<div class="card">
+	<div class="card-header">
+		<div class="card-title">Şirket İçi Mesajlar</div>
+	</div>
+	<div class="card-body">
+		<td><strong>@Model.Messages</strong></td>
+		<br />
+		<a href="/Admin/Message/InBox" class="btn btn-info">Geri Dön</a>
+	</div>
+</div>
+
+
+
+

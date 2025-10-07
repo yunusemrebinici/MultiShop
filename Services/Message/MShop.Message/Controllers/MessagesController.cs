@@ -37,7 +37,7 @@ namespace MShop.Message.Controllers
 			return Ok("Ekleme İşlemi Başarılı");
 		}
 
-		[HttpPut("ReadedMessage/{messageId}")]
+		[HttpGet("ReadedMessage/{messageId}")]
 		public async Task<IActionResult> ReadedMessage(int messageId)
 		{
 			await _userMessageService.ReadedMessage(messageId);
@@ -49,6 +49,12 @@ namespace MShop.Message.Controllers
 		{
 			await _userMessageService.DeleteMessage(messageId);
 			return Ok("Silme İşlemi Başarılı");
+		}
+
+		[HttpGet("GetMessageDetail/{messageId}")]
+		public async Task<IActionResult> GetMessageDetail(int messageId)
+		{
+			return Ok(await _userMessageService.GetMessageDetailByMessageId(messageId));
 		}
 	}
 }

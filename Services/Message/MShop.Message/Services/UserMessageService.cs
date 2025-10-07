@@ -36,6 +36,12 @@ namespace MShop.Message.Services
 			return _mapper.Map<List<GetMessageByUserId>>(values);
 		}
 
+		public async Task<GetMessageDetailByMessageIdDto> GetMessageDetailByMessageId(int messageId)
+		{
+			var value= await _messageContext.Messages.Where(x=>x.UserMessageId == messageId).FirstOrDefaultAsync();
+			return  _mapper.Map<GetMessageDetailByMessageIdDto>(value);
+		}
+
 		public async Task ReadedMessage(int messageId)
 		{
 			var update = await _messageContext.Messages.Where(x => x.UserMessageId == messageId).FirstOrDefaultAsync();

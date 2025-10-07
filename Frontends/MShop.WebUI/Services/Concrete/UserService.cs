@@ -12,6 +12,11 @@ namespace MShop.WebUI.Services.Concrete
 			_httpclient = httpclient;
 		}
 
+		public async Task<List<UserDetailViewModel>> GetAllUsers()
+		{
+			return await _httpclient.GetFromJsonAsync<List<UserDetailViewModel>>("/api/AppUsers/UserList");
+		}
+
 		public async Task<UserDetailViewModel> GetUserInfo()
 		{
 			return await _httpclient.GetFromJsonAsync<UserDetailViewModel>("/api/AppUsers/GetUser");
