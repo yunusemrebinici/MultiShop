@@ -5,7 +5,7 @@ namespace MShop.WebUI.Services.MessageServices
 	public interface IUserMessageService
 	{
 		
-		Task<GetMessageByUserId> GetMessageByUserId(string userId);
+		Task<List<GetMessageByUserId>> GetMessageByUserId();
 		Task SendMessage(CreateMessageDto createMessageDto);
 		Task ReadedMessage(int messageId);
 		Task DeleteMessage(int messageId);

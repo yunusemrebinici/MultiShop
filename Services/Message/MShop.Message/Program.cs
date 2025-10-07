@@ -11,7 +11,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
 	opt.Authority = builder.Configuration["IdentityServerUrl"];
 	opt.Audience = "ResourceMessage";
 	opt.RequireHttpsMetadata = false;
-})
+});
 
 // Add services to the container.
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
@@ -40,6 +40,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

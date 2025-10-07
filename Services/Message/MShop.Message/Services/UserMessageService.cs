@@ -30,10 +30,10 @@ namespace MShop.Message.Services
 			await _messageContext.SaveChangesAsync();
 		}
 
-		public async Task<GetMessageByUserId> GetMessageByUserId(string userId)
+		public async Task<List<GetMessageByUserId>> GetMessageByUserId(string userId)
 		{
-			var values= await _messageContext.Messages.Where(x => x.ReceiverId == userId).FirstOrDefaultAsync();
-			return _mapper.Map<GetMessageByUserId>(values);
+			var values= await _messageContext.Messages.Where(x => x.ReceiverId == userId).ToListAsync();
+			return _mapper.Map<List<GetMessageByUserId>>(values);
 		}
 
 		public async Task ReadedMessage(int messageId)

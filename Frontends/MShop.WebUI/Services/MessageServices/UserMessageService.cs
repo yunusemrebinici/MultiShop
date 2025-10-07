@@ -1,34 +1,40 @@
 ﻿using Frontends.DTO.MESSAGE;
+using MShop.WebUI.Services.Interfaces;
 
 namespace MShop.WebUI.Services.MessageServices
 {
 	public class UserMessageService : IUserMessageService
 	{
 		private readonly HttpClient _httpClient;
+		private readonly IUserService _userService;
 
-		public UserMessageService(HttpClient httpClient)
+		public UserMessageService(HttpClient httpClient, IUserService userService)
 		{
-		    _httpClient = httpClient;
+			_httpClient = httpClient;
+			_userService = userService;
 		}
 
 		public async Task DeleteMessage(int messageId)
 		{
-			await _httpClient.DeleteAsync($"messages/DeleteMessage/{messageId}");
+			await _httpClient.DeleteAsync($"Messages/DeleteMessage/{messageId}");
 		}
 
-		public Task<GetMessageByUserId> GetMessageByUserId(string userId)
+		public async Task<List<GetMessageByUserId>> GetMessageByUserId( )
 		{
-			throw new NotImplementedException();
+			string userId = _userService.GetUserInfo().Result.Id;
+			var response= await _httpClient.GetFromJsonAsync<List<GetMessageByUserId>>($"Messages/{userId}");
+			return response;
 		}
 
-		public Task ReadedMessage(int messageId)
+		public async Task ReadedMessage(int messageId)
 		{
-			throw new NotImplementedException();
+			await _httpClient.GetAsync($"Messages/DeleteMessage/{messageId}");
 		}
 
-		public Task SendMessage(CreateMessageDto createMessageDto)
+		public async Task SendMessage(CreateMessageDto createMessageDto)
 		{
-			throw new NotImplementedException();
+			createMessageDto.SenderId=_userService.GetUserInfo().Result.Id;
+			await _httpClient.PostAsJsonAsync<CreateMessageDto>("Messages", createMessageDto);
 		}
 	}
 }
