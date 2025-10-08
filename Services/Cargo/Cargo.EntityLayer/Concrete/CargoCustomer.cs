@@ -10,6 +10,8 @@ namespace Cargo.EntityLayer.Concrete
 	{
 		public int CargoCustomerId { get; set; }
 
+		public string? UserId { get; set; }
+
 		public string Name { get; set; }
 
 		public string Surname { get; set; }

@@ -6,7 +6,7 @@ using MShop.Message.Services;
 
 namespace MShop.Message.Controllers
 {
-	[AllowAnonymous]
+	[Authorize]
 	[Route("api/[controller]")]
 	[ApiController]
 	public class MessagesController : ControllerBase

@@ -1,4 +1,6 @@
-﻿using Cargo.EntityLayer.Concrete;
+﻿using Cargo.DTO.CargoCustomerDtos;
+using Cargo.DTO.CargoDetailDtos;
+using Cargo.EntityLayer.Concrete;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,5 +11,8 @@ namespace Cargo.BusinessLayer.Abstract
 {
 	public interface ICargoCustomerService:IGenericService<CargoCustomer>
 	{
+		Task<CargoCustomer> TGetUserCargoDetail(string userId);
+
+		Task CreateCargoDetail(CreateCargoCustomerDto createCargoCustomerDto);
 	}
 }

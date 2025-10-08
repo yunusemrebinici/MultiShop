@@ -9,5 +9,6 @@ namespace Cargo.DataAccessLayer.Abstract
 {
 	public interface ICargoCustomerDal:IGenericDal<CargoCustomer>
 	{
+		Task<CargoCustomer> GetUserCargoDetail(string userId);
 	}
 }

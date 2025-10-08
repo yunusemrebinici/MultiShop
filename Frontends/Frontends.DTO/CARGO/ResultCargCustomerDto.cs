@@ -4,14 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Cargo.DTO.CargoCustomerDtos
+namespace Frontends.DTO.CARGO
 {
-	public class CreateCargoCustomerDto
+	public class ResultCargCustomerDto
 	{
-		
-		public string Name { get; set; }
+		public int CargoCustomerId { get; set; }
 
 		public string? UserId { get; set; }
+
+		public string Name { get; set; }
 
 		public string Surname { get; set; }
 

@@ -1,5 +1,6 @@
 ﻿using Cargo.BusinessLayer.Abstract;
 using Cargo.DataAccessLayer.Abstract;
+using Cargo.DTO.CargoCustomerDtos;
 using Cargo.EntityLayer.Concrete;
 using System;
 using System.Collections.Generic;
@@ -22,6 +23,8 @@ namespace Cargo.BusinessLayer.Concrete
 		{
 			await _companyDal.Add(entity);
 		}
+
+		
 
 		public async Task TDelete(CargoCompany entity)
 		{

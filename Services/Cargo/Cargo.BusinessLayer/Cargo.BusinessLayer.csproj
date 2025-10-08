@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Cargo.DataAccessLayer\Cargo.DataAccessLayer.csproj" />
+    <ProjectReference Include="..\Cargo.DTO\Cargo.DTO.csproj" />
   </ItemGroup>
 
 </Project>
