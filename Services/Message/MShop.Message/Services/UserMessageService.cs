@@ -54,7 +54,7 @@ namespace MShop.Message.Services
 		{
 			createMessageDto.IsReaded = false;
 			var values = _mapper.Map<UserMessage>(createMessageDto);
-			await _messageContext.Messages.AddAsync(values);
+			 _messageContext.Messages.AddAsync(values);
 			await _messageContext.SaveChangesAsync();
 		}
 	}

@@ -61,6 +61,8 @@ namespace MShop.WebUI.Areas.Admin.Controllers
 		[HttpPost]
 		public async Task<IActionResult> SendMessage(CreateMessageDto createMessageDto)
 		{
+
+			await _messageService.SendMessage(createMessageDto);
 			return RedirectToAction("InBox");
 		}
 	}

@@ -4,6 +4,39 @@
     Layout = "~/Areas/Admin/Views/AdminLayout/Index.cshtml";
 }
 
-<h1>SendMessage</h1>
+<form method="post">
 
-@Html.DropDownListFor(x => x.SenderId, (List<SelectListItem>)ViewBag.Receiver, new { @class = "form-control" })
+	<div class="col-md-12">
+		<div class="card">
+			<div class="card-header">
+				<div class="card-title">Mesaj Gönderme</div>
+			</div>
+			<div class="card-body">
+
+				<div class="form-group">
+					<label for="squareInput">Alıcı İsmi</label>
+					@Html.DropDownListFor(x => x.ReceiverId, (List<SelectListItem>)ViewBag.Receiver, new { @class = "form-control" })
+				</div>
+
+				<div class="form-group">
+					<label for="squareInput">Konu</label>
+					<input type="text" class="form-control input-square" id="squareInput" asp-for="Subject" placeholder="Konu">
+				</div>
+
+				<div class="form-group">
+					<label for="squareInput">Mesaj</label>
+					<textarea  class="form-control input-square" id="squareInput" asp-for="Messages" placeholder="Mesaj"></textarea>
+				</div>
+
+				<input type="hidden" asp-for="IsReaded" value="false" />
+				
+
+			</div>
+			<div class="card-action">
+				<button class="btn btn-success">Gönder</button>
+			</div>
+		</div>
+
+	</div>
+
+</form>

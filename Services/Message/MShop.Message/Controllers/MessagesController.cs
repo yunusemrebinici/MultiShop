@@ -33,6 +33,7 @@ namespace MShop.Message.Controllers
 		[HttpPost]
 		public async Task<IActionResult>SendMessage(CreateMessageDto createMessageDto)
 		{
+			createMessageDto.SendedDate = DateTime.UtcNow;
 			await _userMessageService.SendMessage(createMessageDto);
 			return Ok("Ekleme İşlemi Başarılı");
 		}
