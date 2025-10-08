@@ -25,20 +25,7 @@ namespace Cargo.WebApi.Controllers
 
 			var values = await _customerService.TGetUserCargoDetail(userId);
 
-			return Ok(new ResultCargoCustomerDto()
-			{
-				Address = values.Address,
-				CargoCustomerId = values.CargoCustomerId,
-				City = values.City,
-				District = values.District,
-				Email = values.Email,
-				Name = values.Name,
-				Phone = values.Phone,
-				Surname = values.Surname,
-				UserId = values.UserId
-
-
-			});
+			return Ok(values);
 		}
 
 		[HttpPost]

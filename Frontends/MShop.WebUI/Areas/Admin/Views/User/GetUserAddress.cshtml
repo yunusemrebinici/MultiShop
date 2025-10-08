@@ -1,0 +1,45 @@
+﻿@model ResultCargCustomerDto
+@{
+	ViewData["Title"] = "GetUserAddress";
+	Layout = "~/Areas/Admin/Views/AdminLayout/Index.cshtml";
+}
+
+<div class="card">
+	<div class="card-header">
+		<div class="card-title">Tüm Kullanıcı Bilgileri</div>
+	</div>
+	<div class="card-body">
+		<table class="table table-head-bg-success">
+			<thead>
+				<tr>
+					<th scope="col">#</th>
+					<th scope="col">Ad</th>
+					<th scope="col">SoyAd</th>
+					<th scope="col">Mail</th>
+					<th scope="col">Şehir</th>
+					<th scope="col">İlçe</th>
+					<th scope="col">Adres</th>
+					<th scope="col">Telefon</th>
+
+
+				</tr>
+			</thead>
+			<tbody>
+
+
+				<tr>
+					<td>1</td>
+					<td>@Model.Name</td>
+					<td>@Model.Surname</td>
+					<td>@Model.Email</td>
+					<td>@Model.City</td>
+					<td>@Model.District</td>
+					<td>@Model.Address</td>
+					<td>@Model.Phone</td>
+				</tr>
+
+			</tbody>
+		</table>
+	</div>
+</div>
+

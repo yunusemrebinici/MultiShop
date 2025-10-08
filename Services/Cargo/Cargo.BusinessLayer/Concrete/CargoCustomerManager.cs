@@ -55,9 +55,32 @@ namespace Cargo.BusinessLayer.Concrete
 			return await _customerDal.GetAll();
 		}
 
-		public async Task<CargoCustomer> TGetUserCargoDetail(string userId)
+		public async Task<ResultCargoCustomerDto> TGetUserCargoDetail(string userId)
 		{
-			return await _customerDal.GetUserCargoDetail(userId);
+			var values= await _customerDal.GetUserCargoDetail(userId);
+
+			if(values != null)
+			{
+				return new ResultCargoCustomerDto()
+				{
+					Address = values.Address,
+					CargoCustomerId = values.CargoCustomerId,
+					City = values.City,
+					District = values.District,
+					Email = values.Email,
+					Name = values.Name,
+					Phone = values.Phone,
+					Surname = values.Surname,
+					UserId = values.UserId
+
+
+				};
+			}
+			else
+			{
+				return new ResultCargoCustomerDto();
+			}
+			
 		}
 
 		public async Task TUpdate(CargoCustomer entity)

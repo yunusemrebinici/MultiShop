@@ -11,7 +11,7 @@ namespace Cargo.BusinessLayer.Abstract
 {
 	public interface ICargoCustomerService:IGenericService<CargoCustomer>
 	{
-		Task<CargoCustomer> TGetUserCargoDetail(string userId);
+		Task<ResultCargoCustomerDto> TGetUserCargoDetail(string userId);
 
 		Task CreateCargoDetail(CreateCargoCustomerDto createCargoCustomerDto);
 	}
