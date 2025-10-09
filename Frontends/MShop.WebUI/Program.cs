@@ -24,6 +24,7 @@ using MShop.WebUI.Services.OrderServices.AddressService;
 using MShop.WebUI.Services.OrderServices.OrderDetail;
 using MShop.WebUI.Services.MessageServices;
 using MShop.WebUI.Services.CargoServices.CargoCustomer;
+using MShop.WebUI.Services.StatisticServices;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -171,6 +172,11 @@ builder.Services.AddHttpClient<IUserMessageService, UserMessageService>(opt =>
 builder.Services.AddHttpClient<ICargoCustomerService, CargoCustomerService>(opt =>
 {
 	opt.BaseAddress = new Uri($"{values.OcelotServerUrl}/{values.Cargo.Path}");
+}).AddHttpMessageHandler<ResourcheOwnerPasswordTokenHandler>();
+
+builder.Services.AddHttpClient<IStatisticService, StatisticService>(opt =>
+{
+	opt.BaseAddress = new Uri($"{values.OcelotServerUrl}/{values.Catalog.Path}");
 }).AddHttpMessageHandler<ResourcheOwnerPasswordTokenHandler>();
 
 
