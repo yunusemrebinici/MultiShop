@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace M.Shop.Catalog.Controllers
 {
-	[Authorize]
+	[AllowAnonymous]
 	[Route("api/[controller]")]
 	[ApiController]
 	public class ContactsController : ControllerBase

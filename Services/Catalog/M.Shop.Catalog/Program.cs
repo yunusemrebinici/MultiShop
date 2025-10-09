@@ -16,6 +16,7 @@ using M.Shop.Catalog.Services.FeatureProductServices;
 using M.Shop.Catalog.Services.OfferDiscountServices;
 using M.Shop.Catalog.Services.BrandServices;
 using M.Shop.Catalog.Services.ContactServices;
+using M.Shop.Catalog.Services.StatisticServices;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -40,6 +41,7 @@ builder.Services.AddScoped<IFeatureProductServices,FeatureProductServices>();
 builder.Services.AddScoped<IOfferDiscountServices,OfferDiscountServices>();
 builder.Services.AddScoped<IBrandServices,BrandServices>();
 builder.Services.AddScoped<IContactService,ContactService>();
+builder.Services.AddScoped<IStatisticService,StatisticService>();
 
 builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
 
