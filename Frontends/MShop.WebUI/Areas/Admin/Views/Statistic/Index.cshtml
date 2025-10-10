@@ -1,84 +1,121 @@
-﻿
-@{
-    ViewData["Title"] = "Index";
-    Layout = "~/Areas/Admin/Views/AdminLayout/Index.cshtml";
+﻿@{
+	ViewData["Title"] = "Index";
+	Layout = "~/Areas/Admin/Views/AdminLayout/Index.cshtml";
 }
+<script src="~/lib/jquery/dist/jquery.js"></script><script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/microsoft/signalr/dist/browser/signalr.min.js"></script>
+<script src="~/lib/microsoft/signalr/dist/browser/signalr.js"></script>
 
-<div class="col-md-3">
-	<div class="card card-stats card-warning">
-		<div class="card-body ">
-			<div class="row">
-				<div class="col-5">
-					<div class="icon-big text-center">
-						<i class="la la-users"></i>
-					</div>
-				</div>
-				<div class="col-7 d-flex align-items-center">
-					<div class="numbers">
-						<p class="card-category">Toplam Kategori Sayısı</p>
-						<h4 class="card-title">@ViewBag.CategoryCount</h4>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
-<div class="col-md-3">
-	<div class="card card-stats card-success">
-		<div class="card-body ">
-			<div class="row">
-				<div class="col-5">
-					<div class="icon-big text-center">
-						<i class="la la-bar-chart"></i>
-					</div>
-				</div>
-				<div class="col-7 d-flex align-items-center">
-					<div class="numbers">
-						<p class="card-category">Toplam Marka Sayısı</p>
-						<h4 class="card-title">@ViewBag.BrandCount</h4>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
-<div class="col-md-3">
-	<div class="card card-stats card-danger">
-		<div class="card-body">
-			<div class="row">
-				<div class="col-5">
-					<div class="icon-big text-center">
-						<i class="la la-newspaper-o"></i>
-					</div>
-				</div>
-				<div class="col-7 d-flex align-items-center">
-					<div class="numbers">
-						<p class="card-category">Ortalama Ürün Fiyatı</p>
-						<h4 class="card-title">@ViewBag.ProductAvg</h4>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
-<div class="col-md-3">
-	<div class="card card-stats card-primary">
-		<div class="card-body ">
-			<div class="row">
-				<div class="col-5">
-					<div class="icon-big text-center">
-						<i class="la la-check-circle"></i>
-					</div>
-				</div>
-				<div class="col-7 d-flex align-items-center">
-					<div class="numbers">
-						<p class="card-category">Son Eklenen Ürün</p>
-						<h4 class="card-title">@ViewBag.LastCreatedProduct</h4>
-					</div>
+<div class="content">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="card">
+					<script type="text/javascript">
+						$(document).ready(()=>{
+							var connection=new signalR.HubConnectionBuilder().withUrl("http://localhost:7079/SignalRHub").build();
+							$("#connstatus").text(connection.state);
+
+												connection.start().then(()=>{
+							$("#connstatus").text(connection.state);
+
+							setInterval(()=>{
+								connection.invoke("Statistics");
+							},1000);
+
+						}).catch((err)=> {console.log(err)});
+
+						
+						
+							connection.on("ReciveAvgProductPrice",(value)=>{
+						$("#avgProductPrice").text(value);
+						 });
+
+						});
+					</script>
 				</div>
 			</div>
 		</div>
 	</div>
 </div>
 
+
+<div class="card-body">
+	<div class="col-md-3">
+		<div class="card card-stats card-warning">
+			<div class="card-body ">
+				<div class="row">
+					<div class="col-5">
+						<div class="icon-big text-center">
+							<i class="la la-users"></i>
+						</div>
+					</div>
+					<div class="col-7 d-flex align-items-center">
+						<div class="numbers">
+							<p class="card-category">Toplam Kategori Sayısı</p>
+							<h4 class="card-title">@ViewBag.CategoryCount</h4>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-3">
+		<div class="card card-stats card-success">
+			<div class="card-body ">
+				<div class="row">
+					<div class="col-5">
+						<div class="icon-big text-center">
+							<i class="la la-bar-chart"></i>
+						</div>
+					</div>
+					<div class="col-7 d-flex align-items-center">
+						<div class="numbers">
+							<p class="card-category">Toplam Marka Sayısı</p>
+							<h4 class="card-title">@ViewBag.BrandCount</h4>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-3">
+		<div class="card card-stats card-danger">
+			<div class="card-body">
+				<div class="row">
+					<div class="col-5">
+						<div class="icon-big text-center">
+							<i class="la la-newspaper-o"></i>
+						</div>
+					</div>
+					<div class="col-7 d-flex align-items-center">
+						<div class="numbers">
+							<p class="card-category">Ortalama Ürün Fiyatı</p>
+							<h4 class="card-title" id="avgProductPrice"></h4>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-3">
+		<div class="card card-stats card-primary">
+			<div class="card-body ">
+				<div class="row">
+					<div class="col-5">
+						<div class="icon-big text-center">
+							<i class="la la-check-circle"></i>
+						</div>
+					</div>
+					<div class="col-7 d-flex align-items-center">
+						<div class="numbers">
+							<p class="card-category">Son Eklenen Ürün</p>
+							<h4 class="card-title">@ViewBag.LastCreatedProduct</h4>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
 

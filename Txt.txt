@@ -9,3 +9,4 @@ comment port number 7075
 payment port number 7076
 ımages port number 7077
 message port number	7078
+signalr port number 7079
