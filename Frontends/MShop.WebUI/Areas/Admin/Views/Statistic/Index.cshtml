@@ -31,6 +31,23 @@
 						$("#avgProductPrice").text(value);
 						 });
 
+						 connection.on("ReciveBrandCount",(value)=>{
+						$("#brandCount").text(value);
+						 });
+
+						  connection.on("ReceiveCategoryCount",(value)=>{
+						$("#categoryCount").text(value);
+						 });
+
+						  connection.on("ReceiveContactCount",(value)=>{
+						$("#contactCount").text(value);
+						 });
+
+						   connection.on("ReceiveLastProductName",(value)=>{
+						$("#lastProductName").text(value);
+						 });
+
+
 						});
 					</script>
 				</div>
@@ -53,7 +70,7 @@
 					<div class="col-7 d-flex align-items-center">
 						<div class="numbers">
 							<p class="card-category">Toplam Kategori Sayısı</p>
-							<h4 class="card-title">@ViewBag.CategoryCount</h4>
+							<h4 class="card-title" id="categoryCount"></h4>
 						</div>
 					</div>
 				</div>
@@ -72,7 +89,7 @@
 					<div class="col-7 d-flex align-items-center">
 						<div class="numbers">
 							<p class="card-category">Toplam Marka Sayısı</p>
-							<h4 class="card-title">@ViewBag.BrandCount</h4>
+							<h4 class="card-title" id="brandCount"></h4>
 						</div>
 					</div>
 				</div>
@@ -110,7 +127,7 @@
 					<div class="col-7 d-flex align-items-center">
 						<div class="numbers">
 							<p class="card-category">Son Eklenen Ürün</p>
-							<h4 class="card-title">@ViewBag.LastCreatedProduct</h4>
+							<h4 class="card-title" id="lastProductName"></h4>
 						</div>
 					</div>
 				</div>

@@ -14,8 +14,20 @@ namespace MShop.SignalR.Hubs
 
 		public async Task Statistics()
 		{
-			var response= await _statisticService.GetAvgProductPrice();
-			await Clients.All.SendAsync("ReciveAvgProductPrice", response);
+			var productAvg= await _statisticService.GetAvgProductPrice();
+			await Clients.All.SendAsync("ReciveAvgProductPrice", productAvg);
+
+			var brandCount= await _statisticService.GetBrandCount();
+			await Clients.All.SendAsync("ReciveBrandCount", brandCount);
+
+			var categoryCount= await _statisticService.GetCategoryCount();
+			await Clients.All.SendAsync("ReceiveCategoryCount", categoryCount);
+
+			var contactCount= await _statisticService.GetContactCount();
+			await Clients.All.SendAsync("ReceiveContactCount", contactCount);
+
+			var lastCreatedProductName= await _statisticService.GetLastCreatedProductName();
+			await Clients.All.SendAsync("ReceiveLastProductName", lastCreatedProductName);
 			
 		}
 
